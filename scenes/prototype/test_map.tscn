@@ -14,7 +14,7 @@ bounce = 0.2
 [node name="TestMap" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_5ive5")]
-position = Vector2(450, 242)
+position = Vector2(489, 390)
 
 [node name="Environment" type="StaticBody2D" parent="."]
 position = Vector2(0, 182)
@@ -33,7 +33,7 @@ position = Vector2(637, 516.5)
 shape = SubResource("RectangleShape2D_5ive5")
 
 [node name="Package" parent="." instance=ExtResource("2_1jiho")]
-position = Vector2(1084, 590)
+position = Vector2(537, 620)
 physics_material_override = SubResource("PhysicsMaterial_1jiho")
 
 [node name="Target" parent="." instance=ExtResource("3_r0cy5")]

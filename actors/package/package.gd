@@ -14,12 +14,13 @@ func _physics_process(_delta: float) -> void:
 
 	# Track the last significant velocity before collision
 	if linear_velocity.length() > 0.1:  # Ignore extremely small velocities
-		pre_impact_velocity = linear_velocity.length()
+		pre_impact_velocity = round(linear_velocity.length())
 		can_score = false
 		$CanScore.text = str(can_score)
 	else: 
-		can_score = true
-		$CanScore.text = str(can_score)
+		if not is_carried: 
+			can_score = true
+			$CanScore.text = str(can_score)
 
 func _on_body_entered(body) -> void:
 	if pre_impact_velocity > impact_threshold and !is_colliding:
@@ -29,9 +30,8 @@ func _on_body_entered(body) -> void:
 		await get_tree().create_timer(0.5).timeout
 		is_colliding = false
 
-func _handle_collision(collider: Object) -> void:
-	print("Handling collision with: ", collider)
-	# Add collision logic here
+func _handle_collision(_collider: Object) -> void:
+	pass
 
 func set_carry(carried):
 	is_carried = carried

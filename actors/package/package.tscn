@@ -27,9 +27,9 @@ shape = SubResource("RectangleShape2D_75ikm")
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 1
-offset_left = 31.0
+offset_left = 33.0
 offset_top = -26.0
-offset_right = 117.0
+offset_right = 119.0
 text = "Velocity"
 label_settings = SubResource("LabelSettings_nwj4g")
 
@@ -49,6 +49,8 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
 shape = SubResource("RectangleShape2D_nwj4g")
 debug_color = Color(0.567411, 0.557114, 0, 0.42)
+
+[node name="Scorer" type="Marker2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ImpactDetector" to="." method="_on_body_entered"]
