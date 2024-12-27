@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://68yluvrhmvun"]
+
+[ext_resource type="Script" uid="uid://cltvvitp2uh05" path="res://actors/target/target.gd" id="1_v0odm"]
+[ext_resource type="Texture2D" uid="uid://cro770p32uiqc" path="res://actors/target/ProtoArt.png" id="2_r1hle"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1hle"]
+size = Vector2(200, 6)
+
+[node name="Target" type="Node2D"]
+script = ExtResource("1_v0odm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 12)
+texture = ExtResource("2_r1hle")
+
+[node name="ScoringArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoringArea"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_r1hle")
+
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="ScoringArea" to="." method="_on_scoring_area_body_entered"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_check_score"]

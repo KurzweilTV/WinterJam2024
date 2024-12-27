@@ -2,13 +2,18 @@ extends CharacterBody2D
 
 @export var acceleration: float = 140.0
 @export var drag: float = 2.0
-@export var sink_force: float = 20.0
 @export var wind_force: Vector2 = Vector2.ZERO
 @export var max_tilt_degrees: float = 25.0
 @export var tilt_speed: float = 0.3
 
 var package: RigidBody2D = null
 var joint: DampedSpringJoint2D = null
+var base_sink_force: float = 5.0
+var sink_force: float = base_sink_force
+var carried_mass: float = 0.0 :
+	set(value):
+		carried_mass = value
+		sink_force = base_sink_force * value
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Vector2.ZERO
@@ -61,9 +66,12 @@ func grab_package(target: RigidBody2D) -> void:
 	joint.length = 10.0  # Adjust rope length
 	joint.stiffness = 100.0  # Adjust stiffness
 	joint.damping = 2.0  # Adjust damping
+	carried_mass = package.mass
+	package.set_carry(true)
 
 func release_package() -> void:
-	# Detach the package
+	package.set_carry(false)
+	carried_mass = 0.0
 	if joint:
 		remove_child(joint)
 		joint.queue_free()
@@ -76,5 +84,5 @@ func _on_pickup_range_body_entered(body: Node2D) -> void:
 	if package == null and body is Package:
 		grab_package(body)
 
-func _on_pickup_range_body_exited(body: Node2D) -> void:
+func _on_pickup_range_body_exited(_body: Node2D) -> void:
 	pass

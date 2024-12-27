@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://chxud6mic8u42"]
+[gd_scene load_steps=6 format=3 uid="uid://chxud6mic8u42"]
 
 [ext_resource type="Script" uid="uid://c2kfpoya8wn6u" path="res://actors/player/prototype/player.gd" id="1_bsrf5"]
 [ext_resource type="Texture2D" uid="uid://d313riuowyjfw" path="res://actors/player/prototype/protoDrone.png" id="1_pgm85"]
+[ext_resource type="Texture2D" uid="uid://tu8jw5l4xabw" path="res://actors/player/prototype/ShitRope.png" id="3_x5yr3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsrf5"]
 size = Vector2(36, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5yr3"]
-size = Vector2(36, 64)
+size = Vector2(36, 108)
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
@@ -26,12 +27,19 @@ position = Vector2(0, 17)
 [node name="Rope" type="Line2D" parent="."]
 physics_interpolation_mode = 1
 z_index = -1
+texture_filter = 1
+width = 5.0
+texture = ExtResource("3_x5yr3")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
 
 [node name="PickupRange" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange"]
-position = Vector2(0, 65)
+position = Vector2(0, 87)
 shape = SubResource("RectangleShape2D_x5yr3")
 debug_color = Color(6.73831e-07, 0.627389, 0.502336, 0.42)
 

@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdu8x4i7e4oky"]
+[gd_scene load_steps=6 format=3 uid="uid://bdu8x4i7e4oky"]
 
 [ext_resource type="PackedScene" uid="uid://chxud6mic8u42" path="res://actors/player/prototype/player.tscn" id="1_5ive5"]
 [ext_resource type="PackedScene" uid="uid://bivicuqrihjn6" path="res://actors/package/package.tscn" id="2_1jiho"]
+[ext_resource type="PackedScene" uid="uid://68yluvrhmvun" path="res://actors/target/target.tscn" id="3_r0cy5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ive5"]
 size = Vector2(1292, 95)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1jiho"]
+rough = true
+bounce = 0.2
 
 [node name="TestMap" type="Node2D"]
 
@@ -23,8 +28,13 @@ offset_right = 1287.0
 offset_bottom = 552.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment"]
+visible = false
 position = Vector2(637, 516.5)
 shape = SubResource("RectangleShape2D_5ive5")
 
 [node name="Package" parent="." instance=ExtResource("2_1jiho")]
-position = Vector2(575, 618)
+position = Vector2(1084, 590)
+physics_material_override = SubResource("PhysicsMaterial_1jiho")
+
+[node name="Target" parent="." instance=ExtResource("3_r0cy5")]
+position = Vector2(1142, 652)
