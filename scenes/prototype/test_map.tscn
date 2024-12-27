@@ -11,17 +11,17 @@ size = Vector2(981, 95)
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_5ive5")]
 position = Vector2(450, 242)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Environment" type="StaticBody2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+[node name="ColorRect" type="ColorRect" parent="Environment"]
 offset_left = -10.0
 offset_top = 470.0
 offset_right = 968.0
 offset_bottom = 552.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment"]
 position = Vector2(481.5, 516.5)
 shape = SubResource("RectangleShape2D_5ive5")
 
-[node name="Package" parent="StaticBody2D" instance=ExtResource("2_1jiho")]
-position = Vector2(415, 425)
+[node name="Package" parent="." instance=ExtResource("2_1jiho")]
+position = Vector2(419, 424)

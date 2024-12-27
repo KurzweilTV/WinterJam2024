@@ -1,19 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://bivicuqrihjn6"]
+[gd_scene load_steps=5 format=3 uid="uid://bivicuqrihjn6"]
 
 [ext_resource type="Script" uid="uid://d3ujbujs7nqj6" path="res://actors/package/package.gd" id="1_tfbw6"]
+[ext_resource type="Texture2D" uid="uid://dudcspxgjlc8l" path="res://actors/package/Prototype/ProtoCrate.png" id="2_nwj4g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ikm"]
-size = Vector2(65, 40)
+size = Vector2(58, 54)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nwj4g"]
+font_size = 14
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Package" type="RigidBody2D"]
 mass = 10.0
 script = ExtResource("1_tfbw6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 65.0
-offset_bottom = 40.0
-color = Color(0.623237, 0.28728, 7.70092e-07, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.113281, 0.105469)
+texture = ExtResource("2_nwj4g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(32.5, 20)
 shape = SubResource("RectangleShape2D_75ikm")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 31.0
+offset_top = -26.0
+offset_right = 117.0
+text = "Velocity"
+label_settings = SubResource("LabelSettings_nwj4g")
