@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bivicuqrihjn6"]
+[gd_scene load_steps=6 format=3 uid="uid://bivicuqrihjn6"]
 
 [ext_resource type="Script" uid="uid://d3ujbujs7nqj6" path="res://actors/package/package.gd" id="1_tfbw6"]
 [ext_resource type="Texture2D" uid="uid://dudcspxgjlc8l" path="res://actors/package/Prototype/ProtoCrate.png" id="2_nwj4g"]
@@ -11,15 +11,18 @@ font_size = 14
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwj4g"]
+size = Vector2(64, 60)
+
 [node name="Package" type="RigidBody2D"]
 mass = 10.0
 script = ExtResource("1_tfbw6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Art" type="Sprite2D" parent="."]
 scale = Vector2(0.113281, 0.105469)
 texture = ExtResource("2_nwj4g")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_75ikm")
 
 [node name="Label" type="Label" parent="."]
@@ -29,3 +32,14 @@ offset_top = -26.0
 offset_right = 117.0
 text = "Velocity"
 label_settings = SubResource("LabelSettings_nwj4g")
+
+[node name="ImpactDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
+shape = SubResource("RectangleShape2D_nwj4g")
+debug_color = Color(0.567411, 0.557114, 0, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ImpactDetector" to="." method="_on_body_entered"]

@@ -28,6 +28,7 @@ physics_interpolation_mode = 1
 z_index = -1
 
 [node name="PickupRange" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange"]
 position = Vector2(0, 65)

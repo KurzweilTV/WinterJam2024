@@ -73,9 +73,8 @@ func release_package() -> void:
 
 # Detect and pick up packages
 func _on_pickup_range_body_entered(body: Node2D) -> void:
-	print("Body Entered: " + body.name)
 	if package == null and body is Package:
 		grab_package(body)
 
 func _on_pickup_range_body_exited(body: Node2D) -> void:
-	print("Body Exited: " + body.name)
+	pass
