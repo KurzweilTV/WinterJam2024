@@ -128,7 +128,7 @@ position = Vector2(21, -22)
 emitting = false
 amount = 30
 lifetime = 3.0
-randomness = 0.43
+randomness = 0.5
 texture = ExtResource("6_jtfgw")
 process_material = SubResource("ParticleProcessMaterial_m13tc")
 

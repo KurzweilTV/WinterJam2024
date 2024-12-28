@@ -22,6 +22,10 @@ config/icon="uid://dhb452tmo71f8"
 
 Message="*res://globals/MessageSystem.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+
 [display]
 
 window/size/viewport_width=1280

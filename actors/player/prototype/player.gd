@@ -101,7 +101,6 @@ func release_package() -> void:
 
 func take_damage(amount: float) -> void:
 	health -= amount
-	print("HP: %s" % health)
 	if health <= 50:
 		%DamageEffect.emitting = true
 	if health <= 0:
