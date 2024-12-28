@@ -10,7 +10,7 @@ func _on_scoring_area_body_entered(body: Node2D) -> void:
 		
 func calculate_score() -> float:
 	var dist = scorer.global_position.distance_to(package.global_position)
-	var score = (base_score - dist) * package.mass
+	var score = round((base_score - dist) * package.mass)
 	return max(score, 50.0)
 	
 func _on_score_timer_timeout() -> void:

@@ -4,8 +4,8 @@ extends RigidBody2D
 @onready var speedo: Label = $Label
 
 var impact_threshold = 200.0  # Minimum speed for collision
-var is_colliding = false
 var pre_impact_velocity: float = 0.0  # Velocity just before the collision
+var is_colliding = false
 var can_score: bool = true
 var is_carried: bool = false
 
