@@ -1,19 +1,28 @@
 extends CharacterBody2D
 
 @export var acceleration: float = 140.0
-@export var drag: float = 2.0
+@export var drag: float = 5.0
 @export var wind_force: Vector2 = Vector2.ZERO
 @export var max_tilt_degrees: float = 25.0
 @export var tilt_speed: float = 0.3
 
 var package: RigidBody2D = null
 var joint: DampedSpringJoint2D = null
-var base_sink_force: float = 5.0
+var base_sink_force: float = 10.0
 var sink_force: float = base_sink_force
 var carried_mass: float = 0.0 :
 	set(value):
 		carried_mass = value
-		sink_force = base_sink_force * value
+		sink_force = (base_sink_force * value) * 0.8
+
+var pixels_per_meter = 50 
+var altitude_offset = 100
+
+func _process(_delta):
+	# Convert global_position (pixels) to meters
+	var meters_per_pixel = 1.0 / pixels_per_meter
+	var position_in_meters = (global_position.y * -meters_per_pixel) + altitude_offset
+	$Label.text = str("%sm") % snapped(position_in_meters, 0.1)
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Vector2.ZERO
