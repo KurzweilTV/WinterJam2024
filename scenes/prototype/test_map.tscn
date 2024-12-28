@@ -152,7 +152,7 @@ sources/0 = SubResource("TileSetAtlasSource_ljpuv")
 [node name="TestMap" type="Node2D"]
 
 [node name="Package" parent="." instance=ExtResource("2_1jiho")]
-position = Vector2(539, 609)
+position = Vector2(515, 596)
 physics_material_override = SubResource("PhysicsMaterial_1jiho")
 
 [node name="Target" parent="." instance=ExtResource("3_r0cy5")]

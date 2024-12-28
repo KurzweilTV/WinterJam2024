@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bivicuqrihjn6"]
 
 [ext_resource type="Script" uid="uid://d3ujbujs7nqj6" path="res://actors/package/package.gd" id="1_tfbw6"]
-[ext_resource type="Texture2D" uid="uid://dudcspxgjlc8l" path="res://actors/package/Prototype/ProtoCrate.png" id="2_nwj4g"]
+[ext_resource type="Texture2D" uid="uid://chhcy2usd3sl0" path="res://actors/package/Package.png" id="2_80ebm"]
 [ext_resource type="FontFile" uid="uid://bakc864gqvrlp" path="res://assets/fonts/Kenney Future Narrow.ttf" id="3_80ebm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ikm"]
-size = Vector2(58, 54)
+size = Vector2(102, 86)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nwj4g"]
 font = ExtResource("3_80ebm")
@@ -16,26 +16,32 @@ shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.294118)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwj4g"]
-size = Vector2(64, 60)
+size = Vector2(104, 88)
 
 [node name="Package" type="RigidBody2D"]
 mass = 10.0
 script = ExtResource("1_tfbw6")
 
 [node name="Art" type="Sprite2D" parent="."]
-scale = Vector2(0.113281, 0.105469)
-texture = ExtResource("2_nwj4g")
+texture_filter = 1
+position = Vector2(-2.86102e-06, 4.76837e-06)
+scale = Vector2(0.796875, 0.680259)
+texture = ExtResource("2_80ebm")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_75ikm")
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 1
-offset_left = 33.0
-offset_top = -26.0
-offset_right = 121.0
+offset_left = 52.0
+offset_top = 21.0
+offset_right = 140.0
+offset_bottom = 47.0
 text = "Velocity"
 label_settings = SubResource("LabelSettings_nwj4g")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CanScore" type="Label" parent="."]
 visible = false
@@ -48,6 +54,7 @@ text = "CanScore"
 label_settings = SubResource("LabelSettings_nwj4g")
 
 [node name="ImpactDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 3
 
