@@ -1,0 +1,122 @@
+[gd_scene load_steps=19 format=3 uid="uid://bvwpvkxq3w8mv"]
+
+[ext_resource type="Texture2D" uid="uid://bsdfyuxqisuxf" path="res://actors/player/explosion/regularExplosion00.png" id="1_g47wm"]
+[ext_resource type="Texture2D" uid="uid://c8lwnhqnys6ip" path="res://actors/player/explosion/regularExplosion01.png" id="2_4hddm"]
+[ext_resource type="Texture2D" uid="uid://dh07d0i3fi00g" path="res://actors/player/explosion/regularExplosion02.png" id="3_ij7xk"]
+[ext_resource type="Texture2D" uid="uid://d2j2y4rkftl2o" path="res://actors/player/explosion/regularExplosion03.png" id="4_j8vqk"]
+[ext_resource type="Texture2D" uid="uid://fss5kmj0b6hf" path="res://actors/player/explosion/regularExplosion04.png" id="5_xq5wm"]
+[ext_resource type="Texture2D" uid="uid://cvpftt771vit8" path="res://actors/player/explosion/regularExplosion05.png" id="6_5adh3"]
+[ext_resource type="Texture2D" uid="uid://b7p2e507jqowh" path="res://actors/player/explosion/regularExplosion06.png" id="7_0e6tb"]
+[ext_resource type="Texture2D" uid="uid://kul0ryqwf35k" path="res://actors/player/explosion/regularExplosion07.png" id="8_nh7gd"]
+[ext_resource type="Texture2D" uid="uid://2vsyp2n4eckc" path="res://actors/player/explosion/regularExplosion09.png" id="9_ij7xk"]
+[ext_resource type="Texture2D" uid="uid://br1jfc6xjrvh7" path="res://actors/player/explosion/regularExplosion08.png" id="9_imaej"]
+[ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="10_4hddm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6pfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g47wm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4hddm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ij7xk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j8vqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xq5wm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5adh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0e6tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nh7gd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ij7xk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_imaej")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_4hddm"]
+script/source = "extends AnimatedSprite2D
+
+func _ready() -> void:
+	self.play(\"death\")
+	%Particles.emitting = true
+	await get_tree().create_timer(3).timeout
+	Message.emit_signal(\"respawn_player\")
+	self.queue_free()
+"
+
+[sub_resource type="Gradient" id="Gradient_4hddm"]
+offsets = PackedFloat32Array(0, 0.713178)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ij7xk"]
+gradient = SubResource("Gradient_4hddm")
+
+[sub_resource type="Curve" id="Curve_j8vqk"]
+_data = [Vector2(0.0107914, 0.282209), 0.0, 0.0, 0, 0, Vector2(0.985612, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xq5wm"]
+curve = SubResource("Curve_j8vqk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5adh3"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(10, 10, 0)
+emission_shape = 1
+emission_sphere_radius = 25.45
+angle_min = -100.0
+angle_max = 100.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 484.47
+initial_velocity_max = 614.89
+gravity = Vector3(0, -98, 0)
+linear_accel_min = 42.86
+linear_accel_max = 72.67
+radial_accel_min = 10.56
+radial_accel_max = 57.15
+damping_min = 83.096
+damping_max = 100.0
+scale_min = 0.1
+scale_curve = SubResource("CurveTexture_xq5wm")
+color = Color(1, 1, 1, 0.478431)
+color_ramp = SubResource("GradientTexture1D_ij7xk")
+
+[node name="PlayerDeath" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_y6pfq")
+animation = &"death"
+script = SubResource("GDScript_4hddm")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.2, 0.2)
+emitting = false
+amount = 20
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.21
+texture = ExtResource("10_4hddm")
+process_material = SubResource("ParticleProcessMaterial_5adh3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, 120)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0

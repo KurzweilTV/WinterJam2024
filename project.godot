@@ -18,6 +18,10 @@ run/main_scene="uid://bdu8x4i7e4oky"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://dhb452tmo71f8"
 
+[autoload]
+
+Message="*res://globals/MessageSystem.gd"
+
 [display]
 
 window/size/viewport_width=1280

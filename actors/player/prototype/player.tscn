@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://chxud6mic8u42"]
+[gd_scene load_steps=16 format=3 uid="uid://chxud6mic8u42"]
 
 [ext_resource type="Script" uid="uid://c2kfpoya8wn6u" path="res://actors/player/prototype/player.gd" id="1_bsrf5"]
 [ext_resource type="Texture2D" uid="uid://d313riuowyjfw" path="res://actors/player/prototype/protoDrone.png" id="1_pgm85"]
 [ext_resource type="Texture2D" uid="uid://tu8jw5l4xabw" path="res://actors/player/prototype/ShitRope.png" id="3_x5yr3"]
 [ext_resource type="Script" uid="uid://bydyor5jmsok" path="res://actors/player/prototype/camera_2d.gd" id="4_t26e8"]
 [ext_resource type="FontFile" uid="uid://bakc864gqvrlp" path="res://assets/fonts/Kenney Future Narrow.ttf" id="5_tvecv"]
+[ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="6_jtfgw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsrf5"]
 size = Vector2(36, 64)
@@ -14,22 +15,55 @@ size = Vector2(36, 47)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jtfgw"]
 font = ExtResource("5_tvecv")
-font_size = 14
+font_size = 39
 outline_size = 4
 outline_color = Color(0, 0.376987, 0.400208, 1)
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.294118)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tvecv"]
+font = ExtResource("5_tvecv")
+font_size = 44
+outline_size = 4
+outline_color = Color(0, 0.376987, 0.400208, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.294118)
+
+[sub_resource type="Gradient" id="Gradient_ydjel"]
+offsets = PackedFloat32Array(0, 0.112403, 0.341085, 1)
+colors = PackedColorArray(0.772549, 0.215686, 0.0313726, 0, 0.0577778, 0.00409658, 0.000240931, 1, 0.964742, 0.964742, 0.964742, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t7kf4"]
+gradient = SubResource("Gradient_ydjel")
+
+[sub_resource type="Curve" id="Curve_yrblx"]
+_data = [Vector2(0.0143885, 0.431749), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p3pf6"]
+curve = SubResource("Curve_yrblx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m13tc"]
+particle_flag_disable_z = true
+angle_min = -268.3
+angle_max = 635.0
+gravity = Vector3(0, -50, 0)
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_p3pf6")
+color_ramp = SubResource("GradientTexture1D_t7kf4")
+turbulence_noise_strength = 0.1
+
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 motion_mode = 1
 script = ExtResource("1_bsrf5")
-wind_force = Vector2(50, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_pgm85")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_bsrf5")
 
 [node name="Anchor" type="Marker2D" parent="."]
@@ -47,6 +81,7 @@ end_cap_mode = 2
 antialiased = true
 
 [node name="PickupRange" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange"]
@@ -55,19 +90,47 @@ shape = SubResource("RectangleShape2D_x5yr3")
 debug_color = Color(6.73831e-07, 0.627389, 0.502336, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, 80)
+offset = Vector2(0, 120)
 process_callback = 0
 position_smoothing_enabled = true
-position_smoothing_speed = 3.0
+position_smoothing_speed = 6.0
 script = ExtResource("4_t26e8")
 
-[node name="Label" type="Label" parent="."]
+[node name="PlayerTick" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Altitude" type="Label" parent="CanvasLayer"]
 texture_filter = 1
-offset_left = 31.0
-offset_top = -26.0
-offset_right = 119.0
+offset_left = 1021.0
+offset_top = 619.0
+offset_right = 1264.0
+offset_bottom = 664.0
 text = "Altitude"
 label_settings = SubResource("LabelSettings_jtfgw")
 
+[node name="AltLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+texture_filter = 1
+offset_left = 1015.0
+offset_top = 660.0
+offset_right = 1258.0
+offset_bottom = 710.0
+text = "Alt"
+label_settings = SubResource("LabelSettings_tvecv")
+horizontal_alignment = 2
+
+[node name="DamageEffect" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(21, -22)
+emitting = false
+amount = 30
+lifetime = 3.0
+randomness = 0.43
+texture = ExtResource("6_jtfgw")
+process_material = SubResource("ParticleProcessMaterial_m13tc")
+
 [connection signal="body_entered" from="PickupRange" to="." method="_on_pickup_range_body_entered"]
-[connection signal="body_exited" from="PickupRange" to="." method="_on_pickup_range_body_exited"]
+[connection signal="timeout" from="PlayerTick" to="." method="_on_player_tick"]
