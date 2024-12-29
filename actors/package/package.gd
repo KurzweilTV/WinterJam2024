@@ -16,11 +16,9 @@ func _physics_process(_delta: float) -> void:
 	if linear_velocity.length() > 0.1:  # Ignore extremely small velocities
 		pre_impact_velocity = round(linear_velocity.length())
 		can_score = false
-		$CanScore.text = str(can_score)
 	else: 
 		if not is_carried: 
 			can_score = true
-			$CanScore.text = str(can_score)
 
 func _on_body_entered(body) -> void:
 	if pre_impact_velocity > impact_threshold and !is_colliding:

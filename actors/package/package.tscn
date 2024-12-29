@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bakc864gqvrlp" path="res://assets/fonts/Kenney Future Narrow.ttf" id="3_80ebm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ikm"]
-size = Vector2(102, 86)
+size = Vector2(82, 80)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nwj4g"]
 font = ExtResource("3_80ebm")
@@ -16,42 +16,35 @@ shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.294118)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwj4g"]
-size = Vector2(104, 88)
+size = Vector2(86, 84)
 
 [node name="Package" type="RigidBody2D"]
 mass = 10.0
+center_of_mass_mode = 1
+center_of_mass = Vector2(0, 80)
 script = ExtResource("1_tfbw6")
 
 [node name="Art" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-2.86102e-06, 4.76837e-06)
-scale = Vector2(0.796875, 0.680259)
+position = Vector2(3.8147e-06, 37)
+scale = Vector2(0.65625, 0.640625)
 texture = ExtResource("2_80ebm")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(3.8147e-06, 37)
 shape = SubResource("RectangleShape2D_75ikm")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 texture_filter = 1
-offset_left = 52.0
+offset_left = 53.0
 offset_top = 21.0
-offset_right = 140.0
+offset_right = 141.0
 offset_bottom = 47.0
 text = "Velocity"
 label_settings = SubResource("LabelSettings_nwj4g")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="CanScore" type="Label" parent="."]
-visible = false
-texture_filter = 1
-offset_left = -26.0
-offset_top = -47.0
-offset_right = 60.0
-offset_bottom = -21.0
-text = "CanScore"
-label_settings = SubResource("LabelSettings_nwj4g")
 
 [node name="ImpactDetector" type="Area2D" parent="."]
 visible = false
@@ -63,6 +56,7 @@ shape = SubResource("RectangleShape2D_nwj4g")
 debug_color = Color(0.567411, 0.557114, 0, 0.42)
 
 [node name="Scorer" type="Marker2D" parent="."]
+position = Vector2(3.8147e-06, 66)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ImpactDetector" to="." method="_on_body_entered"]

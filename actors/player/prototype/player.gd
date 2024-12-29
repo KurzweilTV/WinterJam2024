@@ -84,8 +84,8 @@ func grab_package(target: RigidBody2D) -> void:
 	joint.node_a = self.get_path()
 	joint.node_b = package.get_path()
 	joint.length = 10.0  # Adjust rope length
-	joint.stiffness = 100.0  # Adjust stiffness
-	joint.damping = 2.0  # Adjust damping
+	joint.stiffness = 500.0  # Adjust stiffness
+	joint.damping = 20.0  # Adjust damping
 	carried_mass = package.mass
 	package.set_carry(true)
 
