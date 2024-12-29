@@ -31,6 +31,7 @@ scale = Vector2(0.65625, 0.640625)
 texture = ExtResource("2_80ebm")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(3.8147e-06, 37)
 shape = SubResource("RectangleShape2D_75ikm")
 
@@ -56,7 +57,7 @@ shape = SubResource("RectangleShape2D_nwj4g")
 debug_color = Color(0.567411, 0.557114, 0, 0.42)
 
 [node name="Scorer" type="Marker2D" parent="."]
-position = Vector2(3.8147e-06, 66)
+position = Vector2(0, 73)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ImpactDetector" to="." method="_on_body_entered"]

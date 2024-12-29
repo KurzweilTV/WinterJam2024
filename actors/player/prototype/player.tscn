@@ -30,7 +30,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5yr3"]
-size = Vector2(36, 84)
+size = Vector2(12, 84)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jtfgw"]
 font = ExtResource("5_tvecv")
@@ -79,6 +79,7 @@ motion_mode = 1
 script = ExtResource("1_bsrf5")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 0)
 sprite_frames = SubResource("SpriteFrames_yrblx")
 autoplay = "default"
 frame_progress = 0.330145
@@ -88,7 +89,7 @@ visible = false
 polygon = PackedVector2Array(-27, 29, -21, 17, -31, -1, -47, -7, -48, -17, -29, -23, -8, -20, 7, -20, 24, -23, 45, -21, 48, -13, 46, -5, 31, -1, 23, 15, 30, 26, 28, 34, 20, 40, 7, 44, -6, 43, -21, 38)
 
 [node name="Anchor" type="Marker2D" parent="."]
-position = Vector2(1, 37)
+position = Vector2(0, 34)
 
 [node name="Rope" type="Line2D" parent="."]
 physics_interpolation_mode = 1
