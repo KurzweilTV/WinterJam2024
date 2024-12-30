@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://chxud6mic8u42"]
+[gd_scene load_steps=20 format=3 uid="uid://chxud6mic8u42"]
 
 [ext_resource type="Script" uid="uid://c2kfpoya8wn6u" path="res://actors/player/prototype/player.gd" id="1_bsrf5"]
 [ext_resource type="Texture2D" uid="uid://cmyi3agbrkcsi" path="res://actors/player/Drone.png" id="2_jtfgw"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bakc864gqvrlp" path="res://assets/fonts/Kenney Future Narrow.ttf" id="5_tvecv"]
 [ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="6_jtfgw"]
 [ext_resource type="Texture2D" uid="uid://dnwm5l080ccbh" path="res://scenes/decorations/light_gradient.tres" id="7_ydjel"]
+[ext_resource type="Texture2D" uid="uid://cb1k4gjnyh16g" path="res://actors/target/spotlight.png" id="8_t7kf4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydjel"]
 atlas = ExtResource("2_jtfgw")
@@ -112,8 +113,11 @@ shape = SubResource("RectangleShape2D_x5yr3")
 debug_color = Color(6.73831e-07, 0.627389, 0.502336, 0.42)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, 120)
+offset = Vector2(0, 140)
+zoom = Vector2(0.8, 0.8)
 process_callback = 0
+limit_bottom = 1200
+limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 script = ExtResource("4_t26e8")
@@ -166,11 +170,18 @@ randomness = 0.5
 texture = ExtResource("6_jtfgw")
 process_material = SubResource("ParticleProcessMaterial_m13tc")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="RedGlow" type="PointLight2D" parent="."]
 position = Vector2(0, 26)
 color = Color(0.760784, 0.223529, 0.231373, 1)
 texture = ExtResource("7_ydjel")
 texture_scale = 0.19
+
+[node name="Spotlight" type="PointLight2D" parent="."]
+position = Vector2(2.00009, 80.8545)
+rotation = -3.14159
+scale = Vector2(1, 0.669602)
+enabled = false
+texture = ExtResource("8_t7kf4")
 
 [connection signal="body_entered" from="PickupRange" to="." method="_on_pickup_range_body_entered"]
 [connection signal="body_exited" from="PickupRange" to="." method="_on_pickup_range_body_exited"]

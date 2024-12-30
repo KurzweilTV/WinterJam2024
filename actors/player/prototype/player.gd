@@ -119,9 +119,11 @@ func take_damage(amount: float) -> void:
 func _on_pickup_range_body_entered(body: Node2D) -> void:
 	if package == null and body is Package:
 		package_in_range = body
+		if not package: $Spotlight.enabled = true
 		
 func _on_pickup_range_body_exited(_body: Node2D) -> void:
 	package_in_range = null
+	$Spotlight.enabled = false
 	
 func _on_player_tick() -> void: # update UI on timer
 	var tween = create_tween()
