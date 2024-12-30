@@ -1,14 +1,18 @@
 extends CharacterBody2D
 
 @export_category("Flight")
-@export var acceleration: float = 140.0
-@export var drag: float = 5.0
+@export var acceleration: float = 220.0
+@export var drag: float = 4.0
 @export var wind_force: Vector2 = Vector2.ZERO
 @export_category("Gameplay")
 @export var health : float = 100.0
 @export var collision_damage : int = 50
 
+@onready var score_label: Label = %GameScore
+
+
 var death_scene : PackedScene = preload("res://actors/player/explosion/player_death.tscn")
+var package_in_range : Package
 var is_alive : bool = true
 var max_tilt_degrees: float = 25.0
 var tilt_speed: float = 0.3
@@ -25,6 +29,7 @@ var carried_mass: float = 0.0 :
 func _ready() -> void:
 	$Sprite2D.show()
 	is_alive = true
+	Message.package_broken.connect(Callable(release_package))
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Vector2.ZERO
@@ -34,10 +39,8 @@ func _physics_process(delta: float) -> void:
 		input_dir.y += 1
 	if Input.is_action_pressed("move_left"):
 		input_dir.x -= 1
-		$Sprite2D.flip_h = false
 	if Input.is_action_pressed("move_right"):
 		input_dir.x += 1
-		$Sprite2D.flip_h = true
 	input_dir = input_dir.normalized()
 
 	# Movementa
@@ -73,8 +76,11 @@ func _physics_process(delta: float) -> void:
 		$Rope.points = [start, mid, end]
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("drop") and package:
-		release_package()
+	if event.is_action_pressed("drop"):
+		if package_in_range and package == null:
+			grab_package(package_in_range)
+		elif package:
+			release_package()
 
 func grab_package(target: RigidBody2D) -> void:
 	# Attach the package
@@ -84,13 +90,13 @@ func grab_package(target: RigidBody2D) -> void:
 	joint.node_a = self.get_path()
 	joint.node_b = package.get_path()
 	joint.length = 10.0  # Adjust rope length
-	joint.stiffness = 500.0  # Adjust stiffness
-	joint.damping = 20.0  # Adjust damping
+	joint.stiffness = 100.0  # Adjust stiffness
+	joint.damping = 5.0  # Adjust damping
 	carried_mass = package.mass
 	package.set_carry(true)
 
 func release_package() -> void:
-	package.set_carry(false)
+	if package: package.set_carry(false)
 	carried_mass = 0.0
 	if joint:
 		remove_child(joint)
@@ -112,9 +118,14 @@ func take_damage(amount: float) -> void:
 # signal functions
 func _on_pickup_range_body_entered(body: Node2D) -> void:
 	if package == null and body is Package:
-		grab_package(body)
-
+		package_in_range = body
+		
+func _on_pickup_range_body_exited(_body: Node2D) -> void:
+	package_in_range = null
+	
 func _on_player_tick() -> void: # update UI on timer
+	var tween = create_tween()
+	tween.tween_property(score_label, "text", str(Game.score), 1)
 	# Handle Altitude
 	var meters_per_pixel = 1.0 / pixels_per_meter
 	var alt = (global_position.y * -meters_per_pixel) + 100 # offset for starting on a building

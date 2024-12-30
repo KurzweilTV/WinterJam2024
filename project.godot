@@ -21,6 +21,7 @@ config/icon="uid://dhb452tmo71f8"
 [autoload]
 
 Message="*res://globals/MessageSystem.gd"
+Game="*res://globals/game_manager.gd"
 
 [debug]
 
@@ -75,3 +76,4 @@ zoom_out={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.033424, 0.0334574, 0.329966, 1)

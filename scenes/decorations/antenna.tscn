@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bguscv0jvgmvl"]
+[gd_scene load_steps=4 format=3 uid="uid://bguscv0jvgmvl"]
 
 [ext_resource type="Texture2D" uid="uid://eeo0unr6qgnv" path="res://scenes/art/decorations/antenna.png" id="1_p6sf4"]
+[ext_resource type="Texture2D" uid="uid://dnwm5l080ccbh" path="res://scenes/decorations/light_gradient.tres" id="2_4svpt"]
 
 [sub_resource type="GDScript" id="GDScript_p6sf4"]
 script/source = "extends StaticBody2D
@@ -17,17 +18,6 @@ func blink_light() -> void:
 		await get_tree().create_timer(1).timeout
 		light.visible = false
 "
-
-[sub_resource type="Gradient" id="Gradient_4svpt"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_rijyc"]
-gradient = SubResource("Gradient_4svpt")
-width = 256
-height = 256
-fill = 1
-fill_from = Vector2(0.5, 0.521368)
-fill_to = Vector2(0.25641, 0.153846)
 
 [node name="Antenna" type="StaticBody2D"]
 texture_filter = 1
@@ -46,4 +36,4 @@ position = Vector2(-1.90735e-06, -43)
 scale = Vector2(1.35938, 1.35938)
 color = Color(1, 0, 0, 1)
 energy = 1.98
-texture = SubResource("GradientTexture2D_rijyc")
+texture = ExtResource("2_4svpt")

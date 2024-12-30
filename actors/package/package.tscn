@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bivicuqrihjn6"]
+[gd_scene load_steps=15 format=3 uid="uid://bivicuqrihjn6"]
 
 [ext_resource type="Script" uid="uid://d3ujbujs7nqj6" path="res://actors/package/package.gd" id="1_tfbw6"]
 [ext_resource type="Texture2D" uid="uid://chhcy2usd3sl0" path="res://actors/package/Package.png" id="2_80ebm"]
 [ext_resource type="FontFile" uid="uid://bakc864gqvrlp" path="res://assets/fonts/Kenney Future Narrow.ttf" id="3_80ebm"]
+[ext_resource type="Texture2D" uid="uid://b3u4x7nth4xw5" path="res://actors/package/indicator_light.png" id="4_c8oos"]
+[ext_resource type="Texture2D" uid="uid://dnwm5l080ccbh" path="res://scenes/decorations/light_gradient.tres" id="5_wm7xg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ikm"]
 size = Vector2(82, 80)
@@ -18,10 +20,93 @@ shadow_color = Color(0, 0, 0, 0.294118)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwj4g"]
 size = Vector2(86, 84)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm7xg"]
+bg_color = Color(0, 0.717647, 0.368627, 1)
+border_color = Color(1.48002e-06, 0.402758, 0.19598, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="GDScript" id="GDScript_wm7xg"]
+script/source = "extends ProgressBar
+
+@onready var animator: AnimationPlayer = $Animator
+
+
+func take_damage(hitpoints) -> void:
+	var tween = create_tween()
+	
+	tween.tween_property(self, \"value\", hitpoints, 1.0)
+	animator.play(\"damaged\")
+	check_warning(hitpoints)
+	
+	
+	
+func check_warning(hitpoints) -> void:
+	if hitpoints <= 300:
+		animator.play(\"warning\")
+"
+
+[sub_resource type="Animation" id="Animation_wm7xg"]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/fill:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.49, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.717647, 0.368627, 1), Color(1, 0.0196078, 0, 1), Color(0, 0.717647, 0.368627, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yvag3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/fill:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.717647, 0.368627, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a5qhx"]
+resource_name = "warning"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/fill:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.708152, 0.586201, 0.109279, 1), Color(0.561467, 0.0794752, 0, 1), Color(0.708152, 0.586201, 0.109279, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5qhx"]
+_data = {
+&"RESET": SubResource("Animation_yvag3"),
+&"damaged": SubResource("Animation_wm7xg"),
+&"warning": SubResource("Animation_a5qhx")
+}
+
 [node name="Package" type="RigidBody2D"]
+texture_filter = 1
 mass = 10.0
 center_of_mass_mode = 1
-center_of_mass = Vector2(0, 80)
+center_of_mass = Vector2(0, 60)
 script = ExtResource("1_tfbw6")
 
 [node name="Art" type="Sprite2D" parent="."]
@@ -48,16 +133,46 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ImpactDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
+position = Vector2(0, 38)
 shape = SubResource("RectangleShape2D_nwj4g")
 debug_color = Color(0.567411, 0.557114, 0, 0.42)
 
 [node name="Scorer" type="Marker2D" parent="."]
 position = Vector2(0, 73)
+
+[node name="IndicatorLight" type="Sprite2D" parent="."]
+position = Vector2(29, -19)
+texture = ExtResource("4_c8oos")
+
+[node name="PointLight2D" type="PointLight2D" parent="IndicatorLight"]
+position = Vector2(0, 10)
+scale = Vector2(0.3, 0.3)
+energy = 1.36
+texture = ExtResource("5_wm7xg")
+texture_scale = 1.56
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -39.0
+offset_top = 13.0
+offset_right = -32.0
+offset_bottom = 62.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_wm7xg")
+max_value = 1000.0
+step = 0.1
+value = 1000.0
+fill_mode = 3
+show_percentage = false
+script = SubResource("GDScript_wm7xg")
+
+[node name="Animator" type="AnimationPlayer" parent="HealthBar"]
+libraries = {
+&"": SubResource("AnimationLibrary_a5qhx")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ImpactDetector" to="." method="_on_body_entered"]
