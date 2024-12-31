@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://clmw80k6iwgj3" path="res://scenes/dangers/wind_zone.gd" id="1_3ij7j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ij7j"]
-size = Vector2(1092, 670)
+size = Vector2(1172, 190)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ij7j"]
 particle_flag_disable_z = true
@@ -19,6 +19,7 @@ shape = SubResource("RectangleShape2D_3ij7j")
 
 [node name="Particles" type="GPUParticles2D" parent="."]
 amount = 200
+visibility_rect = Rect2(-1000, -100, 1500, 200)
 process_material = SubResource("ParticleProcessMaterial_3ij7j")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

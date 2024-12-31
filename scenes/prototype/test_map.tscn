@@ -223,7 +223,12 @@ position = Vector2(2321, -673)
 position = Vector2(3683, 220)
 
 [node name="WindZone" parent="." instance=ExtResource("10_2nqqr")]
-position = Vector2(-300, -210)
+position = Vector2(2168, -160)
+wind = Vector2(-150, 0)
+
+[node name="WindZone2" parent="." instance=ExtResource("10_2nqqr")]
+position = Vector2(3672, 35)
 wind = Vector2(-120, 0)
 
 [editable path="WindZone"]
+[editable path="WindZone2"]
