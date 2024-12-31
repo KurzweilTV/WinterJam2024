@@ -12,7 +12,7 @@ func _on_scoring_area_body_entered(body: Node2D) -> void:
 		package = body
 		
 func calculate_score() -> float:
-	if deactivated: 0
+	if deactivated: return 0
 	var dist = scorer.global_position.distance_to(package.global_position)
 	print("BaseScore: %s" % base_score)
 	print("Distance: %s" % dist)
@@ -33,7 +33,6 @@ func deactivate() -> void:
 	$Target.stop()
 	tween.parallel().tween_property(spotlight1, "energy", 0, 2)
 	tween.parallel().tween_property(spotlight2, "energy", 0, 2)
-	tween.parallel().tween_property(self, "modulate", Color(0.3, 0.3, 0.3), 2)
 	$Target.frame = 0
 	$AnimationPlayer.play("deactivate")
 	deactivated = true
