@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export_category("Flight")
@@ -115,6 +116,10 @@ func take_damage(amount: float) -> void:
 		death_anim.global_position = global_position
 		self.queue_free()
 		
+
+func set_wind(wind: Vector2) -> void:
+	wind_force = wind		
+
 # signal functions
 func _on_pickup_range_body_entered(body: Node2D) -> void:
 	if package == null and body is Package:

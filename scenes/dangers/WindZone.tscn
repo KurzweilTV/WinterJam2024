@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://7vtt4o0o4djm"]
+
+[ext_resource type="Script" uid="uid://clmw80k6iwgj3" path="res://scenes/dangers/wind_zone.gd" id="1_3ij7j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ij7j"]
+size = Vector2(1092, 670)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ij7j"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 200, 1)
+gravity = Vector3(-200, 0, 0)
+
+[node name="WindZone" type="Area2D"]
+script = ExtResource("1_3ij7j")
+
+[node name="Detector" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3ij7j")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_3ij7j")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
