@@ -4,9 +4,11 @@ extends RigidBody2D
 @onready var speedo: Label = $Label
 @onready var light: PointLight2D = $IndicatorLight/PointLight2D
 @onready var health_bar: ProgressBar = %HealthBar
+@onready var cracks: AnimatedSprite2D = $DamageArt
 
+var max_package_hp: float = 1000.0
 var package_hp : float = 1000
-var impact_threshold = 150.0  # Minimum speed for collision
+var impact_threshold = 180.0  # Minimum speed for collision
 var pre_impact_velocity: float = 0.0  # Velocity just before the collision
 var is_colliding = false
 var can_score: bool = true
@@ -38,7 +40,22 @@ func _on_body_entered(_body) -> void:
 		is_colliding = false
 
 func _handle_collision(speed: float) -> void:
-	package_hp -= speed
+	$GPUParticles2D.emitting = true
+	package_hp -= (speed * 0.7) #Nerf Package Damage here
+	package_hp = clamp(package_hp, 0, max_package_hp) 
+	
+	var hp_percentage = package_hp / max_package_hp
+	
+	if hp_percentage > 0.75:
+		cracks.frame = 0  # No visible damage
+	elif hp_percentage > 0.50:
+		cracks.frame = 1  # Minor damage
+	elif hp_percentage > 0.25:
+		cracks.frame = 2  # Moderate damage
+	else:
+		cracks.frame = 3  # Severe damage
+	
+	
 	%HealthBar.take_damage(package_hp)
 	if package_hp <= 0:
 		Message.emit_signal("package_broken")

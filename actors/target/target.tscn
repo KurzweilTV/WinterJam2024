@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://68yluvrhmvun"]
+[gd_scene load_steps=27 format=3 uid="uid://68yluvrhmvun"]
 
 [ext_resource type="Script" uid="uid://cltvvitp2uh05" path="res://actors/target/target.gd" id="1_v0odm"]
 [ext_resource type="Texture2D" uid="uid://v7el4xeinaob" path="res://actors/target/target_anim.png" id="2_r1hle"]
@@ -126,6 +126,45 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1hle"]
 size = Vector2(200, 6)
 
+[sub_resource type="Animation" id="Animation_xn871"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpotlightPivot1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpotlightPivot2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fader:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.305882, 0.305882, 0.305882, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_6xgv7"]
 resource_name = "attract"
 length = 4.0
@@ -155,40 +194,31 @@ tracks/1/keys = {
 "values": [0.0, -0.0872665, 0.0, 0.0872665, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_xn871"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_32x3y"]
+resource_name = "deactivate"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SpotlightPivot1:rotation")
+tracks/0/path = NodePath("Fader:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpotlightPivot2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"values": [Color(0.305882, 0.305882, 0.305882, 0), Color(0.305882, 0.305882, 0.305882, 0.756863)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_32x3y"]
 _data = {
 &"RESET": SubResource("Animation_xn871"),
-&"attract": SubResource("Animation_6xgv7")
+&"attract": SubResource("Animation_6xgv7"),
+&"deactivate": SubResource("Animation_32x3y")
 }
 
 [node name="Target" type="StaticBody2D"]
+modulate = Color(0.147672, 0.147672, 0.147672, 1)
 texture_filter = 1
 position = Vector2(0, -1)
 script = ExtResource("1_v0odm")
@@ -245,6 +275,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_32x3y")
 }
 autoplay = "attract"
+
+[node name="Fader" type="ColorRect" parent="."]
+offset_left = -101.0
+offset_right = 100.0
+offset_bottom = 33.0
+color = Color(0.305882, 0.305882, 0.305882, 0)
 
 [connection signal="body_entered" from="ScoringArea" to="." method="_on_scoring_area_body_entered"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

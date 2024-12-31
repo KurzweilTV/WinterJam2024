@@ -132,7 +132,7 @@ func _on_player_tick() -> void: # update UI on timer
 	var meters_per_pixel = 1.0 / pixels_per_meter
 	var alt = (global_position.y * -meters_per_pixel) + 100 # offset for starting on a building
 	if alt > 121.0:
-		wind_force.y = 300
+		wind_force.y = 400
 		%AltLabel.modulate = Color.RED
 	else: 
 		wind_force.y = 0

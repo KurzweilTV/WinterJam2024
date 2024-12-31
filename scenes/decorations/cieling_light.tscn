@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://e1f2j3p7t3t6"]
+
+[ext_resource type="Texture2D" uid="uid://n2xmv2yf7b14" path="res://scenes/decorations/indicator_light.png" id="1_oh4kv"]
+[ext_resource type="Texture2D" uid="uid://dnwm5l080ccbh" path="res://scenes/decorations/light_gradient.tres" id="2_ub7yk"]
+
+[node name="CielingLight" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 16)
+rotation = 3.14159
+texture = ExtResource("1_oh4kv")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(7.62939e-06, 7)
+rotation = 3.14159
+scale = Vector2(0.194631, 0.163164)
+color = Color(1, 1, 0.533333, 1)
+texture = ExtResource("2_ub7yk")
