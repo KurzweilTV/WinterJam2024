@@ -59,6 +59,12 @@ func _handle_collision(speed: float) -> void:
 	%HealthBar.take_damage(package_hp)
 	if package_hp <= 0:
 		Message.emit_signal("package_broken")
+		is_carried = false
+		$Art.hide()
+		$DamageArt.hide()
+		$GPUParticles2D.amount = 50
+		$GPUParticles2D.emitting = true
+		await get_tree().create_timer(3).timeout
 		self.queue_free()
 
 func set_carry(carried):
