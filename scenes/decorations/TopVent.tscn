@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://cc31ttlbg5b1t"]
+
+[ext_resource type="Texture2D" uid="uid://c4xr5ic2k4s4t" path="res://scenes/decorations/top_vent.png" id="1_j1icr"]
+[ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="2_r53ko"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r53ko"]
+atlas = ExtResource("1_j1icr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcw4r"]
+atlas = ExtResource("1_j1icr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1m3d"]
+atlas = ExtResource("1_j1icr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ec41m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r53ko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcw4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1m3d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tydm0"]
+size = Vector2(40, 44)
+
+[sub_resource type="Curve" id="Curve_kcw4r"]
+_data = [Vector2(0, 0.990031), 0.0, 0.0, 0, 0, Vector2(0.78777, 0.511503), 0.0, 0.0, 0, 0, Vector2(1, 0.0130368), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p1m3d"]
+curve = SubResource("Curve_kcw4r")
+
+[sub_resource type="Curve" id="Curve_ec41m"]
+_data = [Vector2(0, 0.481595), 0.0, 0.0, 0, 0, Vector2(0.600719, 0.521472), 0.0, 0.0, 0, 0, Vector2(0.802158, 0.651074), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_tydm0"]
+curve = SubResource("Curve_ec41m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6nosu"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 357.8
+gravity = Vector3(10, -20, 0)
+scale_min = 0.1
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_tydm0")
+alpha_curve = SubResource("CurveTexture_p1m3d")
+
+[node name="TopVent" type="StaticBody2D"]
+texture_filter = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ec41m")
+autoplay = "default"
+frame_progress = 0.509806
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_tydm0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+position = Vector2(8, -13)
+amount = 15
+lifetime = 3.0
+preprocess = 3.0
+visibility_rect = Rect2(-100, -358.515, 200, 481.81)
+texture = ExtResource("2_r53ko")
+process_material = SubResource("ParticleProcessMaterial_6nosu")

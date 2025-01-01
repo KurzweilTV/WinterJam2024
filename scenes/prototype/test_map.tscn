@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bdu8x4i7e4oky"]
+[gd_scene load_steps=14 format=4 uid="uid://bdu8x4i7e4oky"]
 
 [ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="1_ljpuv"]
 [ext_resource type="PackedScene" uid="uid://bivicuqrihjn6" path="res://actors/package/package.tscn" id="2_1jiho"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://e1f2j3p7t3t6" path="res://scenes/decorations/cieling_light.tscn" id="8_xf232"]
 [ext_resource type="PackedScene" uid="uid://cng78nv88bu75" path="res://scenes/decorations/shelf.tscn" id="9_v7ljr"]
 [ext_resource type="PackedScene" uid="uid://7vtt4o0o4djm" path="res://scenes/dangers/WindZone.tscn" id="10_2nqqr"]
+[ext_resource type="PackedScene" uid="uid://cc31ttlbg5b1t" path="res://scenes/decorations/TopVent.tscn" id="11_ejvm0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xf232"]
 texture = ExtResource("5_u7ep1")
@@ -196,6 +197,81 @@ position = Vector2(2206, -244)
 [node name="Antenna2" parent="Decorations" instance=ExtResource("5_b77qm")]
 position = Vector2(2879, -533)
 
+[node name="TopVent" parent="Decorations" instance=ExtResource("11_ejvm0")]
+position = Vector2(3908, -32)
+
+[node name="TopVent2" parent="Decorations" instance=ExtResource("11_ejvm0")]
+position = Vector2(-474, 96)
+
+[node name="TopVent3" parent="Decorations" instance=ExtResource("11_ejvm0")]
+position = Vector2(673, 609)
+
+[node name="CielingLight2" parent="Decorations" instance=ExtResource("8_xf232")]
+position = Vector2(-1617, -244)
+
+[node name="CielingLight4" parent="Decorations" instance=ExtResource("8_xf232")]
+position = Vector2(-1524, -244)
+
+[node name="CielingLight6" parent="Decorations" instance=ExtResource("8_xf232")]
+position = Vector2(-1424, -244)
+
+[node name="CielingLight8" parent="Decorations" instance=ExtResource("8_xf232")]
+position = Vector2(-1318, -244)
+
+[node name="CielingLight10" parent="Decorations" instance=ExtResource("8_xf232")]
+position = Vector2(-1211, -244)
+
+[node name="CielingLight12" parent="Decorations" instance=ExtResource("8_xf232")]
+position = Vector2(-1112, -244)
+
+[node name="CielingLight2" parent="Decorations/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-1102, 0)
+
+[node name="CielingLight4" parent="Decorations/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-1009, 0)
+
+[node name="CielingLight6" parent="Decorations/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-909, 0)
+
+[node name="CielingLight8" parent="Decorations/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-803, 0)
+
+[node name="CielingLight10" parent="Decorations/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-696, 0)
+
+[node name="CielingLight12" parent="Decorations/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-597, 0)
+
+[node name="CielingLight2" parent="Decorations/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-1102, 0)
+
+[node name="CielingLight4" parent="Decorations/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-1009, 0)
+
+[node name="CielingLight6" parent="Decorations/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-909, 0)
+
+[node name="CielingLight8" parent="Decorations/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-803, 0)
+
+[node name="CielingLight10" parent="Decorations/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-696, 0)
+
+[node name="CielingLight12" parent="Decorations/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-597, 0)
+
+[node name="CielingLight8" parent="Decorations/CielingLight12/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-790, 0)
+
+[node name="CielingLight10" parent="Decorations/CielingLight12/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-696, 0)
+
+[node name="CielingLight12" parent="Decorations/CielingLight12/CielingLight12/CielingLight12" instance=ExtResource("8_xf232")]
+position = Vector2(-597, 0)
+
+[node name="Shelf" parent="Decorations" instance=ExtResource("9_v7ljr")]
+position = Vector2(2301, -563)
+
 [node name="Targets" type="Node2D" parent="."]
 
 [node name="Target" parent="Targets" instance=ExtResource("3_r0cy5")]
@@ -205,6 +281,9 @@ position = Vector2(1152, 671)
 [node name="Target2" parent="Targets" instance=ExtResource("3_r0cy5")]
 position = Vector2(-1585, 287)
 
+[node name="Target3" parent="Targets" instance=ExtResource("3_r0cy5")]
+position = Vector2(3683, 220)
+
 [node name="Packages" type="Node2D" parent="."]
 
 [node name="Package" parent="Packages" instance=ExtResource("2_1jiho")]
@@ -213,22 +292,21 @@ position = Vector2(-2396, 238)
 [node name="Package2" parent="Packages" instance=ExtResource("2_1jiho")]
 position = Vector2(-11, 241)
 
-[node name="Shelf" parent="." instance=ExtResource("9_v7ljr")]
-position = Vector2(2301, -563)
-
-[node name="Package" parent="." instance=ExtResource("2_1jiho")]
+[node name="Package3" parent="Packages" instance=ExtResource("2_1jiho")]
 position = Vector2(2321, -673)
 
-[node name="Target" parent="." instance=ExtResource("3_r0cy5")]
-position = Vector2(3683, 220)
+[node name="WindZones" type="Node2D" parent="."]
 
-[node name="WindZone" parent="." instance=ExtResource("10_2nqqr")]
+[node name="WindZone" parent="WindZones" instance=ExtResource("10_2nqqr")]
 position = Vector2(2168, -160)
 wind = Vector2(-150, 0)
 
-[node name="WindZone2" parent="." instance=ExtResource("10_2nqqr")]
-position = Vector2(3672, 35)
+[node name="Detector" parent="WindZones/WindZone" index="0"]
+visible = false
+
+[node name="WindZone2" parent="WindZones" instance=ExtResource("10_2nqqr")]
+position = Vector2(3375, 35)
 wind = Vector2(-120, 0)
 
-[editable path="WindZone"]
-[editable path="WindZone2"]
+[editable path="WindZones/WindZone"]
+[editable path="WindZones/WindZone2"]
