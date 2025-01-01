@@ -14,6 +14,7 @@ var is_colliding = false
 var can_score: bool = true
 var is_carried: bool = false
 func _ready() -> void:
+	Game.package_total += 1
 	%HealthBar.max_value = package_hp
 	%HealthBar.value = package_hp
 
@@ -53,7 +54,6 @@ func _handle_collision(speed: float) -> void:
 		cracks.frame = 2  # Moderate damage
 	else:
 		cracks.frame = 3  # Severe damage
-	
 	
 	%HealthBar.take_damage(package_hp)
 	if package_hp <= 0:

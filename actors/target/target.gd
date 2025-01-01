@@ -3,6 +3,7 @@ extends Node2D
 @onready var spotlight1: PointLight2D = $SpotlightPivot1/PointLight2D
 @onready var spotlight2: PointLight2D = $SpotlightPivot2/PointLight2D2
 @onready var scorer: Marker2D = $Scorer
+
 var package : Package = null
 var base_score : int = 100
 var deactivated : bool = false
@@ -23,8 +24,11 @@ func calculate_score() -> float:
 	
 	var score = round((base_score - distance_penalty * 3) + (package.package_hp * hp_weight))
 	%ScoreParticles.emitting = true
+	Game.package_collected += 1
 	deactivate()
+	
 	return max(score, 50.0)
+
 	
 func deactivate() -> void:
 	var tween = create_tween()
@@ -41,4 +45,5 @@ func _on_score_timer_timeout() -> void:
 		Game.score += int(calculate_score())
 		package.queue_free()
 		package = null
+		Game.check_victory()
 		

@@ -29,7 +29,7 @@ texture = ExtResource("1_p6sf4")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(-32, 96, -10, -25, -24, -34, -24, -60, -11, -60, -11, -69, 0, -77, 12, -67, 12, -59, 24, -59, 24, -34, 11, -23, 32, 96)
+polygon = PackedVector2Array(-32, 96, -10, -25, -24, -34, -24, -60, -11, -60, -11, -69, 0, -73.3333, 12, -67, 12, -59, 24, -59, 24, -34, 11, -23, 32, 96)
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(-1.90735e-06, -43)

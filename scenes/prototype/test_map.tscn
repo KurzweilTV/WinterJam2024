@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bdu8x4i7e4oky"]
+[gd_scene load_steps=15 format=4 uid="uid://bdu8x4i7e4oky"]
 
 [ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="1_ljpuv"]
 [ext_resource type="PackedScene" uid="uid://bivicuqrihjn6" path="res://actors/package/package.tscn" id="2_1jiho"]
@@ -11,6 +11,18 @@
 [ext_resource type="PackedScene" uid="uid://cng78nv88bu75" path="res://scenes/decorations/shelf.tscn" id="9_v7ljr"]
 [ext_resource type="PackedScene" uid="uid://7vtt4o0o4djm" path="res://scenes/dangers/WindZone.tscn" id="10_2nqqr"]
 [ext_resource type="PackedScene" uid="uid://cc31ttlbg5b1t" path="res://scenes/decorations/TopVent.tscn" id="11_ejvm0"]
+
+[sub_resource type="GDScript" id="GDScript_ejvm0"]
+script/source = "extends Node2D
+
+func _ready() -> void:
+	get_tree().paused = false
+	reset_game()
+
+func reset_game() -> void:
+	Game.score = 0
+	Game.package_collected = 0
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xf232"]
 texture = ExtResource("5_u7ep1")
@@ -144,6 +156,7 @@ terrain_set_0/terrain_0/color = Color(0.383935, 0.00102422, 0.985737, 1)
 sources/1 = SubResource("TileSetAtlasSource_xf232")
 
 [node name="TestMap" type="Node2D"]
+script = SubResource("GDScript_ejvm0")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 z_index = 2
@@ -279,8 +292,8 @@ position = Vector2(3457, -32)
 [node name="TopVent5" parent="Decorations" instance=ExtResource("11_ejvm0")]
 position = Vector2(6811, -159)
 
-[node name="Antenna" parent="." instance=ExtResource("5_b77qm")]
-position = Vector2(6531, -522)
+[node name="Antenna3" parent="Decorations" instance=ExtResource("5_b77qm")]
+position = Vector2(6533, -522)
 
 [node name="Targets" type="Node2D" parent="."]
 
@@ -321,7 +334,7 @@ position = Vector2(6698, -203)
 
 [node name="WindZone" parent="WindZones" instance=ExtResource("10_2nqqr")]
 position = Vector2(2168, -160)
-wind = Vector2(-200, 0)
+wind = Vector2(-220, 0)
 
 [node name="WindZone2" parent="WindZones" instance=ExtResource("10_2nqqr")]
 position = Vector2(3375, 35)

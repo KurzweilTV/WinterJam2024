@@ -133,7 +133,7 @@ func _on_pickup_range_body_exited(_body: Node2D) -> void:
 	
 func _on_player_tick() -> void: # update UI on timer
 	score_label.text = str(Game.score)
-	# Handle Altitude
+	%PkgNumber.text = str(Game.package_total - Game.package_collected)
 	var meters_per_pixel = 1.0 / pixels_per_meter
 	var alt = (global_position.y * -meters_per_pixel) + 100 # offset for starting on a building
 	if alt > 121.0:
