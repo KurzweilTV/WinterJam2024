@@ -8,7 +8,7 @@ extends RigidBody2D
 
 var max_package_hp: float = 1000.0
 var package_hp : float = 1000
-var impact_threshold = 180.0  # Minimum speed for collision
+var impact_threshold = 200.0  # Minimum speed for collision
 var pre_impact_velocity: float = 0.0  # Velocity just before the collision
 var is_colliding = false
 var can_score: bool = true

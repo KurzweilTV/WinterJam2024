@@ -2,9 +2,11 @@ class_name Player
 extends CharacterBody2D
 
 @export_category("Flight")
-@export var acceleration: float = 220.0
-@export var drag: float = 4.0
+@export var acceleration: float = 500
+@export var drag: float = 25.0
+@export var max_speed: float = 200
 @export var wind_force: Vector2 = Vector2.ZERO
+@export var base_sink_force: float = 10.0
 @export_category("Gameplay")
 @export var health : float = 100.0
 @export var collision_damage : int = 50
@@ -20,7 +22,6 @@ var tilt_speed: float = 0.3
 var pixels_per_meter = 50 #scale for what a meter is
 var package: RigidBody2D = null
 var joint: DampedSpringJoint2D = null
-var base_sink_force: float = 10.0
 var sink_force: float = base_sink_force
 var carried_mass: float = 0.0 :
 	set(value):
@@ -49,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	velocity += wind_force * delta
 	velocity.y += sink_force * delta
 	if is_alive:
-		velocity = velocity.move_toward(Vector2.ZERO, drag * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, drag * delta).limit_length(max_speed)
 
 	var collision_info = move_and_collide(velocity * delta)
 
@@ -71,7 +72,7 @@ func _physics_process(delta: float) -> void:
 		var start = self.to_local($Anchor.global_position)
 		var end = self.to_local(package.global_position)
 		var mid = (start + end) / 2
-		var sag_amount = 15.0
+		var sag_amount = 5.0
 		mid.y += sag_amount  
 
 		$Rope.points = [start, mid, end]
@@ -90,9 +91,9 @@ func grab_package(target: RigidBody2D) -> void:
 	add_child(joint)
 	joint.node_a = self.get_path()
 	joint.node_b = package.get_path()
-	joint.length = 10.0  # Adjust rope length
-	joint.stiffness = 100.0  # Adjust stiffness
-	joint.damping = 5.0  # Adjust damping
+	joint.length = 15.0  # this doesn't work?
+	joint.stiffness = 150.0  # Adjust stiffness
+	joint.damping = 10.0  # Adjust damping
 	carried_mass = package.mass
 	package.set_carry(true)
 

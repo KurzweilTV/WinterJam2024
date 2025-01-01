@@ -79,8 +79,10 @@ turbulence_noise_strength = 0.1
 texture_filter = 1
 motion_mode = 1
 script = ExtResource("1_bsrf5")
-acceleration = 300.0
-drag = 3.0
+acceleration = 750.0
+drag = 100.0
+max_speed = 300.0
+base_sink_force = 20.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 0)
@@ -107,6 +109,7 @@ end_cap_mode = 2
 antialiased = true
 
 [node name="PickupRange" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange"]

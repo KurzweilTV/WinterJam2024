@@ -321,10 +321,7 @@ position = Vector2(6698, -203)
 
 [node name="WindZone" parent="WindZones" instance=ExtResource("10_2nqqr")]
 position = Vector2(2168, -160)
-wind = Vector2(-150, 0)
-
-[node name="Detector" parent="WindZones/WindZone" index="0"]
-visible = false
+wind = Vector2(-200, 0)
 
 [node name="WindZone2" parent="WindZones" instance=ExtResource("10_2nqqr")]
 position = Vector2(3375, 35)
