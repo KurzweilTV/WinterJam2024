@@ -131,8 +131,7 @@ func _on_pickup_range_body_exited(_body: Node2D) -> void:
 	$Spotlight.enabled = false
 	
 func _on_player_tick() -> void: # update UI on timer
-	var tween = create_tween()
-	tween.tween_property(score_label, "text", str(Game.score), 1)
+	score_label.text = str(Game.score)
 	# Handle Altitude
 	var meters_per_pixel = 1.0 / pixels_per_meter
 	var alt = (global_position.y * -meters_per_pixel) + 100 # offset for starting on a building

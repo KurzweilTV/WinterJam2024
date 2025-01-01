@@ -16,14 +16,13 @@ func calculate_score() -> float:
 	var dist = scorer.global_position.distance_to(package.global_position)
 	print("BaseScore: %s" % base_score)
 	print("Distance: %s" % dist)
-	print("Mass: %s" % package.mass)
 	print("HP: %s" % package.package_hp)
 
 	var hp_weight = 2.0
-	var distance_penalty = dist * 1.5
-	var mass_influence = package.mass * 0.5
+	var distance_penalty = dist
 	
-	var score = round((base_score - distance_penalty) * mass_influence + (package.package_hp * hp_weight))
+	var score = round((base_score - distance_penalty * 3) + (package.package_hp * hp_weight))
+	%ScoreParticles.emitting = true
 	deactivate()
 	return max(score, 50.0)
 	
@@ -39,7 +38,7 @@ func deactivate() -> void:
 	
 func _on_score_timer_timeout() -> void:
 	if package and package.can_score:
-		Game.score += calculate_score()
+		Game.score += int(calculate_score())
 		package.queue_free()
 		package = null
 		

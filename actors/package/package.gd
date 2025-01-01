@@ -13,7 +13,6 @@ var pre_impact_velocity: float = 0.0  # Velocity just before the collision
 var is_colliding = false
 var can_score: bool = true
 var is_carried: bool = false
-
 func _ready() -> void:
 	%HealthBar.max_value = package_hp
 	%HealthBar.value = package_hp
@@ -40,13 +39,13 @@ func _on_body_entered(_body) -> void:
 		is_colliding = false
 
 func _handle_collision(speed: float) -> void:
-	$GPUParticles2D.emitting = true
+	%DamageParticles.emitting = true
 	package_hp -= (speed * 0.7) #Nerf Package Damage here
 	package_hp = clamp(package_hp, 0, max_package_hp) 
 	
 	var hp_percentage = package_hp / max_package_hp
 	
-	if hp_percentage > 0.75:
+	if hp_percentage > 0.9:
 		cracks.frame = 0  # No visible damage
 	elif hp_percentage > 0.50:
 		cracks.frame = 1  # Minor damage
@@ -62,8 +61,8 @@ func _handle_collision(speed: float) -> void:
 		is_carried = false
 		$Art.hide()
 		$DamageArt.hide()
-		$GPUParticles2D.amount = 50
-		$GPUParticles2D.emitting = true
+		%DamageParticles.amount = 50
+		%DamageParticles.emitting = true
 		await get_tree().create_timer(3).timeout
 		self.queue_free()
 

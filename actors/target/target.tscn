@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://68yluvrhmvun"]
+[gd_scene load_steps=29 format=3 uid="uid://68yluvrhmvun"]
 
 [ext_resource type="Script" uid="uid://cltvvitp2uh05" path="res://actors/target/target.gd" id="1_v0odm"]
 [ext_resource type="Texture2D" uid="uid://v7el4xeinaob" path="res://actors/target/target_anim.png" id="2_r1hle"]
 [ext_resource type="Texture2D" uid="uid://d0oo6puaigabv" path="res://actors/target/TargetStand.png" id="3_v5hy5"]
 [ext_resource type="Texture2D" uid="uid://cb1k4gjnyh16g" path="res://actors/target/spotlight.png" id="4_6xgv7"]
+[ext_resource type="Texture2D" uid="uid://7irlk675aeg3" path="res://actors/package/star_particle.png" id="5_xn871"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5hy5"]
 size = Vector2(200, 10)
@@ -205,8 +206,22 @@ _data = {
 &"deactivate": SubResource("Animation_32x3y")
 }
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_32x3y"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 89.4
+direction = Vector3(0, -1, 0)
+spread = 92.006
+flatness = 0.382
+initial_velocity_min = 164.6
+initial_velocity_max = 254.66
+gravity = Vector3(0, 200, 0)
+scale_min = 0.3
+scale_max = 0.4
+hue_variation_min = 0.09
+hue_variation_max = 0.31
+
 [node name="Target" type="StaticBody2D"]
-modulate = Color(0.147672, 0.147672, 0.147672, 1)
 texture_filter = 1
 position = Vector2(0, -1)
 script = ExtResource("1_v0odm")
@@ -235,6 +250,7 @@ position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_r1hle")
 
 [node name="ScoreTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="Scorer" type="Marker2D" parent="."]
@@ -269,6 +285,17 @@ offset_left = -101.0
 offset_right = 100.0
 offset_bottom = 33.0
 color = Color(0.305882, 0.305882, 0.305882, 0)
+
+[node name="ScoreParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 50
+lifetime = 10.0
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.9
+texture = ExtResource("5_xn871")
+process_material = SubResource("ParticleProcessMaterial_32x3y")
 
 [connection signal="body_entered" from="ScoringArea" to="." method="_on_scoring_area_body_entered"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

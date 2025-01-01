@@ -1,3 +1,3 @@
 extends Node
 
-var score : float
+var score : int

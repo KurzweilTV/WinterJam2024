@@ -79,6 +79,8 @@ turbulence_noise_strength = 0.1
 texture_filter = 1
 motion_mode = 1
 script = ExtResource("1_bsrf5")
+acceleration = 300.0
+drag = 3.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 0)
