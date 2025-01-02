@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b3u4x7nth4xw5" path="res://actors/package/indicator_light.png" id="4_c8oos"]
 [ext_resource type="Texture2D" uid="uid://dnwm5l080ccbh" path="res://scenes/decorations/light_gradient.tres" id="5_wm7xg"]
 [ext_resource type="Texture2D" uid="uid://cr0xvvyytd4br" path="res://actors/package/WoodShard.png" id="7_a5qhx"]
-[ext_resource type="AudioStream" uid="uid://b61ynbyjdopur" path="res://sounds/PackageDamage.ogg" id="8_rgail"]
+[ext_resource type="AudioStream" uid="uid://blry16cdojkj" path="res://sounds/wood_hit.mp3" id="8_rgail"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a5qhx"]
 atlas = ExtResource("3_yvag3")
@@ -247,8 +247,7 @@ process_material = SubResource("ParticleProcessMaterial_yvag3")
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_rgail")
-volume_db = -15.0
-pitch_scale = 0.8
+pitch_scale = 0.71
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ImpactDetector" to="." method="_on_body_entered"]

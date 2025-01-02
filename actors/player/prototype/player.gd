@@ -124,7 +124,9 @@ func release_package() -> void:
 	$Rope.points = []
 
 func take_damage(amount: float) -> void:
+	$Sprite2D/AnimationPlayer.play("damage")
 	health -= amount
+	$DamageSound.play()
 	if health <= 50:
 		%DamageEffect.emitting = true
 	if health <= 0:

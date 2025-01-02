@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://chxud6mic8u42"]
+[gd_scene load_steps=27 format=3 uid="uid://chxud6mic8u42"]
 
 [ext_resource type="Script" uid="uid://c2kfpoya8wn6u" path="res://actors/player/prototype/player.gd" id="1_bsrf5"]
 [ext_resource type="Texture2D" uid="uid://cmyi3agbrkcsi" path="res://actors/player/Drone.png" id="2_jtfgw"]
@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ekw7khlsn4jm" path="res://sounds/DroneStart.mp3" id="9_yrblx"]
 [ext_resource type="AudioStream" uid="uid://2yp3ijok2fbd" path="res://sounds/DroneIdle.mp3" id="10_p3pf6"]
 [ext_resource type="AudioStream" uid="uid://bwoythphaxrfu" path="res://sounds/DroneRunning.mp3" id="11_m13tc"]
-[ext_resource type="AudioStream" uid="uid://b61ynbyjdopur" path="res://sounds/PackageDamage.ogg" id="12_auc78"]
+[ext_resource type="AudioStream" uid="uid://dfwdlflb4e0q8" path="res://sounds/Damage.mp3" id="12_auc78"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydjel"]
 atlas = ExtResource("2_jtfgw")
@@ -34,6 +34,107 @@ animations = [{
 "name": &"default",
 "speed": 41.0
 }]
+
+[sub_resource type="Animation" id="Animation_auc78"]
+resource_name = "damage"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.00784314, -0.25, 0, 0.25, 0, 1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.298039, -0.25, 0, 0.25, 0, 1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_buwib"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvy1c"]
+_data = {
+&"RESET": SubResource("Animation_buwib"),
+&"damage": SubResource("Animation_auc78")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5yr3"]
 size = Vector2(12, 84)
@@ -93,6 +194,11 @@ position = Vector2(-2, 0)
 sprite_frames = SubResource("SpriteFrames_yrblx")
 autoplay = "default"
 frame_progress = 0.330145
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_bvy1c")
+}
 
 [node name="Hitbox" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -224,12 +330,12 @@ volume_db = 2.0
 
 [node name="RunningSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_m13tc")
-volume_db = -7.0
+volume_db = -3.0
+pitch_scale = 0.9
 
-[node name="Death" type="AudioStreamPlayer2D" parent="."]
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_auc78")
-volume_db = -10.0
-pitch_scale = 0.66
+pitch_scale = 0.5
 
 [connection signal="body_entered" from="PickupRange" to="." method="_on_pickup_range_body_entered"]
 [connection signal="body_exited" from="PickupRange" to="." method="_on_pickup_range_body_exited"]

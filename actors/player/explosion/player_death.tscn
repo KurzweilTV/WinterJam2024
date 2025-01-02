@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvwpvkxq3w8mv"]
+[gd_scene load_steps=20 format=3 uid="uid://bvwpvkxq3w8mv"]
 
 [ext_resource type="Texture2D" uid="uid://bsdfyuxqisuxf" path="res://actors/player/explosion/regularExplosion00.png" id="1_g47wm"]
 [ext_resource type="Texture2D" uid="uid://c8lwnhqnys6ip" path="res://actors/player/explosion/regularExplosion01.png" id="2_4hddm"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://2vsyp2n4eckc" path="res://actors/player/explosion/regularExplosion09.png" id="9_ij7xk"]
 [ext_resource type="Texture2D" uid="uid://br1jfc6xjrvh7" path="res://actors/player/explosion/regularExplosion08.png" id="9_imaej"]
 [ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="10_4hddm"]
+[ext_resource type="AudioStream" uid="uid://vuy8fhc7xcjr" path="res://sounds/explosionCrunch_004.ogg" id="12_j8vqk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y6pfq"]
 animations = [{
@@ -54,6 +55,7 @@ animations = [{
 script/source = "extends AnimatedSprite2D
 
 func _ready() -> void:
+	$DeathSound.play()
 	self.play(\"death\")
 	%Particles.emitting = true
 	await get_tree().create_timer(3).timeout
@@ -120,3 +122,8 @@ offset = Vector2(0, 120)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 1.0
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_j8vqk")
+volume_db = -5.0
+pitch_scale = 2.0

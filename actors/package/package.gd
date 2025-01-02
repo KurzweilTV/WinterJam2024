@@ -59,6 +59,7 @@ func _handle_collision(speed: float) -> void:
 	%HealthBar.take_damage(package_hp)
 	if package_hp <= 0:
 		Message.emit_signal("package_broken")
+		Game.score -= 500
 		is_carried = false
 		$Art.hide()
 		$DamageArt.hide()

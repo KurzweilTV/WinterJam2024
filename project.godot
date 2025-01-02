@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="BeginnerJamWinter2024"
+config/name="SkyDrop Express"
 config/description="A drone delivery game"
 config/version="0.1"
 config/tags=PackedStringArray("gamejam")
-run/main_scene="uid://bdu8x4i7e4oky"
+run/main_scene="uid://cbn7ghrkny7gr"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://dhb452tmo71f8"
 
