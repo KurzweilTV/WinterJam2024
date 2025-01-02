@@ -3,6 +3,8 @@ extends Node2D
 @onready var spotlight1: PointLight2D = $SpotlightPivot1/PointLight2D
 @onready var spotlight2: PointLight2D = $SpotlightPivot2/PointLight2D2
 @onready var scorer: Marker2D = $Scorer
+@onready var distance_label: Label = $DistanceLabel
+@onready var text_anim: AnimationPlayer = $DistanceLabel/TextAnim
 
 var package : Package = null
 var base_score : int = 100
@@ -20,6 +22,23 @@ func calculate_score() -> float:
 
 	var hp_weight = 2.0
 	var distance_penalty = dist
+	
+	if dist < 75:
+		print("Perfect!")
+		distance_label.text = "Perfect!"
+		text_anim.play("float_text")
+	elif dist < 85:
+		print("Good!")
+		distance_label.text = "Good!"
+		text_anim.play("float_text")
+	elif dist < 95:
+		print("Almost")
+		distance_label.text = "Almost"
+		text_anim.play("float_text")
+	else:
+		print("Yikes!")
+		distance_label.text = "Yikes!"
+		text_anim.play("float_text")
 	
 	var score = round((base_score - distance_penalty * 3) + (package.package_hp * hp_weight))
 	%ScoreParticles.emitting = true

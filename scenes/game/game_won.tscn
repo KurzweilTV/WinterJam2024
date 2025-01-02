@@ -98,12 +98,13 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[center][b][color=yellow]🎉 Congratulations! 🎉[/color][/b][/center]
+text = "[center][b][color=yellow] Congratulations! [/color][/b][/center]
 
 [center][i][color=cyan]Dear [u]Scamazon Employee #3,857,343[/u],[/color][/i]
 
-Your [b][color=green]timely delivery[/color][/b] of all assigned packages has earned 
-you a [u][color=orange]2nd bathroom break[/color][/u] this week! 🚽💦[/center]
+Your [b][color=green]timely delivery[/color][/b] of all 
+assigned packages has earned 
+you a [u][color=orange]2nd bathroom break[/color][/u] this week! [/center]
 
 [center][i][color=light_pink]Please enjoy this luxurious
  job perk

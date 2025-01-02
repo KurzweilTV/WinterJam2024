@@ -16,7 +16,7 @@ config/version="0.1"
 config/tags=PackedStringArray("gamejam")
 run/main_scene="uid://cbn7ghrkny7gr"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="uid://dhb452tmo71f8"
+config/icon="uid://dtwkb0p2fpg4v"
 
 [autoload]
 

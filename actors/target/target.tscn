@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://68yluvrhmvun"]
+[gd_scene load_steps=35 format=3 uid="uid://68yluvrhmvun"]
 
 [ext_resource type="Script" uid="uid://cltvvitp2uh05" path="res://actors/target/target.gd" id="1_v0odm"]
 [ext_resource type="Texture2D" uid="uid://v7el4xeinaob" path="res://actors/target/target_anim.png" id="2_r1hle"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cb1k4gjnyh16g" path="res://actors/target/spotlight.png" id="4_6xgv7"]
 [ext_resource type="Texture2D" uid="uid://7irlk675aeg3" path="res://actors/package/star_particle.png" id="5_xn871"]
 [ext_resource type="AudioStream" uid="uid://4id66jpiarh7" path="res://sounds/DroneBeeps.mp3" id="6_32x3y"]
+[ext_resource type="FontFile" uid="uid://bakc864gqvrlp" path="res://assets/fonts/Kenney Future Narrow.ttf" id="7_1k41a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5hy5"]
 size = Vector2(200, 10)
@@ -222,6 +223,97 @@ scale_max = 0.4
 hue_variation_min = 0.09
 hue_variation_max = 0.31
 
+[sub_resource type="LabelSettings" id="LabelSettings_xa8lp"]
+font = ExtResource("7_1k41a")
+font_size = 26
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_1k41a"]
+resource_name = "float_text"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(12, -54), Vector2(12, -88)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.9, 0.9), Vector2(1.1, 1.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xa8lp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, -54)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.1, 1.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xa8lp"]
+_data = {
+&"RESET": SubResource("Animation_xa8lp"),
+&"float_text": SubResource("Animation_1k41a")
+}
+
 [node name="Target" type="StaticBody2D"]
 texture_filter = 1
 position = Vector2(0, -1)
@@ -301,6 +393,20 @@ process_material = SubResource("ParticleProcessMaterial_32x3y")
 [node name="ScorePoints" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_32x3y")
 pitch_scale = 0.8
+
+[node name="DistanceLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = 12.0
+offset_top = -54.0
+offset_right = 174.0
+offset_bottom = -24.0
+scale = Vector2(1.1, 1.1)
+label_settings = SubResource("LabelSettings_xa8lp")
+
+[node name="TextAnim" type="AnimationPlayer" parent="DistanceLabel"]
+libraries = {
+&"": SubResource("AnimationLibrary_xa8lp")
+}
 
 [connection signal="body_entered" from="ScoringArea" to="." method="_on_scoring_area_body_entered"]
 [connection signal="body_exited" from="ScoringArea" to="." method="_on_scoring_area_body_exited"]
