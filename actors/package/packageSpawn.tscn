@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu6h46spgkip8"]
+
+[sub_resource type="GDScript" id="GDScript_bmkgm"]
+resource_name = "PackageSpawner"
+script/source = "extends Marker2D
+
+const PACKAGE_SCENE = preload(\"res://actors/package/package.tscn\")
+var package_tracker : Package
+
+func _ready() -> void:
+	spawn_package()
+
+func spawn_package() -> void:
+	if package_tracker:
+		return
+	
+	var new_package = PACKAGE_SCENE.instantiate()
+	add_child.call_deferred(new_package)
+	package_tracker = new_package
+
+	Message.connect(\"package_broken\",Callable(self, \"_on_package_destroyed\"))
+
+func _on_package_destroyed() -> void:
+	Game.package_total -= 1
+	package_tracker = null
+	spawn_package()
+"
+
+[node name="PackageSpawn" type="Marker2D"]
+script = SubResource("GDScript_bmkgm")

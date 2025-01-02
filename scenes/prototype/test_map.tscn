@@ -1,7 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://bdu8x4i7e4oky"]
 
 [ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="1_ljpuv"]
-[ext_resource type="PackedScene" uid="uid://bivicuqrihjn6" path="res://actors/package/package.tscn" id="2_1jiho"]
 [ext_resource type="TileSet" uid="uid://c7y4x1mtapid0" path="res://scenes/prototype/BuildingTiles.tres" id="3_hrooo"]
 [ext_resource type="PackedScene" uid="uid://68yluvrhmvun" path="res://actors/target/target.tscn" id="3_r0cy5"]
 [ext_resource type="PackedScene" uid="uid://bguscv0jvgmvl" path="res://scenes/decorations/antenna.tscn" id="5_b77qm"]
@@ -11,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cng78nv88bu75" path="res://scenes/decorations/shelf.tscn" id="9_v7ljr"]
 [ext_resource type="PackedScene" uid="uid://7vtt4o0o4djm" path="res://scenes/dangers/WindZone.tscn" id="10_2nqqr"]
 [ext_resource type="PackedScene" uid="uid://cc31ttlbg5b1t" path="res://scenes/decorations/TopVent.tscn" id="11_ejvm0"]
+[ext_resource type="PackedScene" uid="uid://cu6h46spgkip8" path="res://actors/package/packageSpawn.tscn" id="12_3spx8"]
 
 [sub_resource type="GDScript" id="GDScript_ejvm0"]
 script/source = "extends Node2D
@@ -315,20 +315,20 @@ position = Vector2(7553, -223)
 
 [node name="Packages" type="Node2D" parent="."]
 
-[node name="Package" parent="Packages" instance=ExtResource("2_1jiho")]
-position = Vector2(-2396, 238)
+[node name="PackageSpawn" parent="Packages" instance=ExtResource("12_3spx8")]
+position = Vector2(-2365, 237)
 
-[node name="Package2" parent="Packages" instance=ExtResource("2_1jiho")]
-position = Vector2(-11, 241)
+[node name="PackageSpawn2" parent="Packages" instance=ExtResource("12_3spx8")]
+position = Vector2(-48, 255)
 
-[node name="Package3" parent="Packages" instance=ExtResource("2_1jiho")]
-position = Vector2(2321, -673)
+[node name="PackageSpawn3" parent="Packages" instance=ExtResource("12_3spx8")]
+position = Vector2(2300, -667)
 
-[node name="Package4" parent="Packages" instance=ExtResource("2_1jiho")]
-position = Vector2(4166, 178)
+[node name="PackageSpawn4" parent="Packages" instance=ExtResource("12_3spx8")]
+position = Vector2(4164, 175)
 
-[node name="Package5" parent="Packages" instance=ExtResource("2_1jiho")]
-position = Vector2(6698, -203)
+[node name="PackageSpawn5" parent="Packages" instance=ExtResource("12_3spx8")]
+position = Vector2(6691, -211)
 
 [node name="WindZones" type="Node2D" parent="."]
 

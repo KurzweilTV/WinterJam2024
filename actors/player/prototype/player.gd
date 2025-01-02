@@ -13,7 +13,8 @@ extends CharacterBody2D
 
 @onready var score_label: Label = %GameScore
 
-
+const PAUSE_SCREEN = preload("res://scenes/game/Pause_Screen.tscn")
+var pause_screen_instance: Control = null
 var death_scene : PackedScene = preload("res://actors/player/explosion/player_death.tscn")
 var package_in_range : Package
 var is_alive : bool = true
@@ -120,6 +121,7 @@ func take_damage(amount: float) -> void:
 
 func set_wind(wind: Vector2) -> void:
 	wind_force = wind		
+		
 
 # signal functions
 func _on_pickup_range_body_entered(body: Node2D) -> void:

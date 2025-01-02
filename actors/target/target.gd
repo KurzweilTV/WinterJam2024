@@ -47,3 +47,8 @@ func _on_score_timer_timeout() -> void:
 		package = null
 		Game.check_victory()
 		
+
+
+func _on_scoring_area_body_exited(body: Node2D) -> void:
+	if body is Package and not deactivated:
+		package = null

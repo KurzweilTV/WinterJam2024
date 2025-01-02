@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://6cpi4y2wpk0"]
+[gd_scene load_steps=7 format=3 uid="uid://6cpi4y2wpk0"]
 
 [ext_resource type="FontFile" uid="uid://bakc864gqvrlp" path="res://assets/fonts/Kenney Future Narrow.ttf" id="1_7omqj"]
 
@@ -19,6 +19,9 @@ func _on_button_pressed() -> void:
 	get_tree().change_scene_to_packed(game_scene)
 	queue_free()
 "
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7omqj"]
+bg_color = Color(0.117647, 0.117647, 0.117647, 0.945098)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7omqj"]
 font = ExtResource("1_7omqj")
@@ -45,6 +48,7 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7omqj")
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 layout_mode = 2
