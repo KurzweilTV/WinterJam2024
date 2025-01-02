@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cc31ttlbg5b1t"]
+[gd_scene load_steps=14 format=3 uid="uid://cc31ttlbg5b1t"]
 
 [ext_resource type="Texture2D" uid="uid://c4xr5ic2k4s4t" path="res://scenes/decorations/top_vent.png" id="1_j1icr"]
 [ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="2_r53ko"]
+[ext_resource type="AudioStream" uid="uid://copn7vxvfej07" path="res://sounds/Steam.mp3" id="3_kcw4r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r53ko"]
 atlas = ExtResource("1_j1icr")
@@ -81,3 +82,10 @@ preprocess = 3.0
 visibility_rect = Rect2(-100, -358.515, 200, 481.81)
 texture = ExtResource("2_r53ko")
 process_material = SubResource("ParticleProcessMaterial_6nosu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kcw4r")
+volume_db = -5.0
+autoplay = true
+attenuation = 2.54912
+bus = &"SFX"

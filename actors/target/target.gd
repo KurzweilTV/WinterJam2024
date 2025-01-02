@@ -13,7 +13,6 @@ func _on_scoring_area_body_entered(body: Node2D) -> void:
 		package = body
 		
 func calculate_score() -> float:
-	if deactivated: return 0
 	var dist = scorer.global_position.distance_to(package.global_position)
 	print("BaseScore: %s" % base_score)
 	print("Distance: %s" % dist)
@@ -25,8 +24,9 @@ func calculate_score() -> float:
 	var score = round((base_score - distance_penalty * 3) + (package.package_hp * hp_weight))
 	%ScoreParticles.emitting = true
 	Game.package_collected += 1
-	deactivate()
 	
+	deactivate()
+	$ScorePoints.play()
 	return max(score, 50.0)
 
 	

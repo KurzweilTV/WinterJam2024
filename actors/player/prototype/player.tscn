@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://chxud6mic8u42"]
+[gd_scene load_steps=24 format=3 uid="uid://chxud6mic8u42"]
 
 [ext_resource type="Script" uid="uid://c2kfpoya8wn6u" path="res://actors/player/prototype/player.gd" id="1_bsrf5"]
 [ext_resource type="Texture2D" uid="uid://cmyi3agbrkcsi" path="res://actors/player/Drone.png" id="2_jtfgw"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="6_jtfgw"]
 [ext_resource type="Texture2D" uid="uid://dnwm5l080ccbh" path="res://scenes/decorations/light_gradient.tres" id="7_ydjel"]
 [ext_resource type="Texture2D" uid="uid://cb1k4gjnyh16g" path="res://actors/target/spotlight.png" id="8_t7kf4"]
+[ext_resource type="AudioStream" uid="uid://ekw7khlsn4jm" path="res://sounds/DroneStart.mp3" id="9_yrblx"]
+[ext_resource type="AudioStream" uid="uid://2yp3ijok2fbd" path="res://sounds/DroneIdle.mp3" id="10_p3pf6"]
+[ext_resource type="AudioStream" uid="uid://bwoythphaxrfu" path="res://sounds/DroneRunning.mp3" id="11_m13tc"]
+[ext_resource type="AudioStream" uid="uid://b61ynbyjdopur" path="res://sounds/PackageDamage.ogg" id="12_auc78"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydjel"]
 atlas = ExtResource("2_jtfgw")
@@ -209,6 +213,23 @@ rotation = -3.14159
 scale = Vector2(1, 0.669602)
 enabled = false
 texture = ExtResource("8_t7kf4")
+
+[node name="StartupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_yrblx")
+volume_db = 3.0
+
+[node name="IdleSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_p3pf6")
+volume_db = 2.0
+
+[node name="RunningSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_m13tc")
+volume_db = -7.0
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_auc78")
+volume_db = -10.0
+pitch_scale = 0.66
 
 [connection signal="body_entered" from="PickupRange" to="." method="_on_pickup_range_body_entered"]
 [connection signal="body_exited" from="PickupRange" to="." method="_on_pickup_range_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bivicuqrihjn6"]
+[gd_scene load_steps=24 format=3 uid="uid://bivicuqrihjn6"]
 
 [ext_resource type="Script" uid="uid://d3ujbujs7nqj6" path="res://actors/package/package.gd" id="1_tfbw6"]
 [ext_resource type="Texture2D" uid="uid://chhcy2usd3sl0" path="res://actors/package/Package.png" id="2_80ebm"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b3u4x7nth4xw5" path="res://actors/package/indicator_light.png" id="4_c8oos"]
 [ext_resource type="Texture2D" uid="uid://dnwm5l080ccbh" path="res://scenes/decorations/light_gradient.tres" id="5_wm7xg"]
 [ext_resource type="Texture2D" uid="uid://cr0xvvyytd4br" path="res://actors/package/WoodShard.png" id="7_a5qhx"]
+[ext_resource type="AudioStream" uid="uid://b61ynbyjdopur" path="res://sounds/PackageDamage.ogg" id="8_rgail"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a5qhx"]
 atlas = ExtResource("3_yvag3")
@@ -243,6 +244,11 @@ explosiveness = 1.0
 randomness = 0.25
 texture = ExtResource("7_a5qhx")
 process_material = SubResource("ParticleProcessMaterial_yvag3")
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_rgail")
+volume_db = -15.0
+pitch_scale = 0.8
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ImpactDetector" to="." method="_on_body_entered"]

@@ -12,7 +12,7 @@ func check_victory() -> void:
 		game_won()
 
 func game_won() -> void:
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1).timeout
 	var game_won_ui = gamewon_scene.instantiate()
 	get_parent().add_child(game_won_ui)
 	game_won_ui.process_mode = Node.PROCESS_MODE_ALWAYS

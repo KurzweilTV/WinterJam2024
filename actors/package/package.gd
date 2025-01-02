@@ -40,6 +40,7 @@ func _on_body_entered(_body) -> void:
 		is_colliding = false
 
 func _handle_collision(speed: float) -> void:
+	$DamageSound.play()
 	%DamageParticles.emitting = true
 	package_hp -= (speed * 0.7) #Nerf Package Damage here
 	package_hp = clamp(package_hp, 0, max_package_hp) 

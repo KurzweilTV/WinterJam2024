@@ -28,12 +28,18 @@ var carried_mass: float = 0.0 :
 	set(value):
 		carried_mass = value
 		sink_force = (base_sink_force * value) * 0.8
+		
+# sounds
+var drone_run_playing : bool = false
+@onready var running_sound: AudioStreamPlayer2D = $RunningSound
 
 func _ready() -> void:
 	$Sprite2D.show()
 	is_alive = true
 	Message.package_broken.connect(Callable(release_package))
-
+	$StartupSound.playing = true
+	$IdleSound.playing = true
+	
 func _physics_process(delta: float) -> void:
 	var input_dir = Vector2.ZERO
 	if Input.is_action_pressed("move_up"):
@@ -46,7 +52,7 @@ func _physics_process(delta: float) -> void:
 		input_dir.x += 1
 	input_dir = input_dir.normalized()
 
-	# Movementa
+	# Movement
 	velocity += input_dir * acceleration * delta
 	velocity += wind_force * delta
 	velocity.y += sink_force * delta
@@ -58,7 +64,16 @@ func _physics_process(delta: float) -> void:
 	if collision_info: # bounce if you hit a building
 		take_damage(collision_damage)
 		velocity = velocity.bounce(collision_info.get_normal()) / 2
-		
+
+	# Handle engine sound
+	if input_dir != Vector2.ZERO: # Movement is happening
+		if not drone_run_playing:
+			running_sound.play()
+			drone_run_playing = true
+	else: # No movement
+		if drone_run_playing:
+			running_sound.stop()
+			drone_run_playing = false
 
 	# Tilt when moving for extra juice
 	var tween = create_tween()
