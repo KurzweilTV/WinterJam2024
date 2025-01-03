@@ -102,6 +102,7 @@ func _input(event: InputEvent) -> void:
 
 func grab_package(target: RigidBody2D) -> void:
 	# Attach the package
+	$RopeSound.play()
 	package = target
 	joint = DampedSpringJoint2D.new()
 	add_child(joint)
@@ -115,6 +116,7 @@ func grab_package(target: RigidBody2D) -> void:
 
 func release_package() -> void:
 	if package: package.set_carry(false)
+	$RopeSound.play()
 	carried_mass = 0.0
 	if joint:
 		remove_child(joint)

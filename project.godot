@@ -14,7 +14,7 @@ config/name="SkyDrop Express"
 config/description="A drone delivery game"
 config/version="0.1"
 config/tags=PackedStringArray("gamejam")
-run/main_scene="uid://cbn7ghrkny7gr"
+run/main_scene="uid://c0uelyfxv7t06"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://dtwkb0p2fpg4v"
 
@@ -87,4 +87,4 @@ pause={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.00935909, 0.00939344, 0.171453, 1)
+environment/defaults/default_clear_color=Color(0.0313726, 0.156863, 0.309804, 1)

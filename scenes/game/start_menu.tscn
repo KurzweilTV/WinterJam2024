@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://cbn7ghrkny7gr"]
+[gd_scene load_steps=38 format=4 uid="uid://cbn7ghrkny7gr"]
 
 [ext_resource type="TileSet" uid="uid://3ovfgermr6m0" path="res://scenes/prototype/BuildingTileFinal.tres" id="1_cmjne"]
 [ext_resource type="PackedScene" uid="uid://bguscv0jvgmvl" path="res://scenes/decorations/antenna.tscn" id="2_i4q7l"]
@@ -11,25 +11,43 @@
 [ext_resource type="Texture2D" uid="uid://cmyi3agbrkcsi" path="res://actors/player/Drone.png" id="9_ywdsp"]
 [ext_resource type="AudioStream" uid="uid://8pb71x6ife5q" path="res://sounds/music.mp3" id="10_p4y4g"]
 [ext_resource type="Texture2D" uid="uid://cifru0bum7g6i" path="res://assets/art/tutorial.png" id="11_mx8md"]
+[ext_resource type="Texture2D" uid="uid://c4rkm7x0cusbp" path="res://assets/art/logo_large_color_light.png" id="12_y4o7c"]
+[ext_resource type="AudioStream" uid="uid://ee2gxblvme15" path="res://sounds/tick_001.ogg" id="13_sqi1f"]
+[ext_resource type="AudioStream" uid="uid://0t2torox18tj" path="res://sounds/switch_004.ogg" id="14_oa5ni"]
 
 [sub_resource type="GDScript" id="GDScript_ywdsp"]
 script/source = "extends CanvasLayer
 
 var game_scene : PackedScene = preload(\"res://scenes/prototype/test_map.tscn\")
 @onready var tutorial_screen: MarginContainer = $TutorialScreen
+@onready var click: AudioStreamPlayer = $Click
+@onready var tick: AudioStreamPlayer = $Tick
 
 func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_packed(game_scene)
-	
 
 func _on_tutorial_button_pressed() -> void:
 	var tween = create_tween()
+	click.play()
 	tween.tween_property(tutorial_screen, \"position\", Vector2(100, tutorial_screen.position.y), 0.5)
 
 
 func _on_tut_close_button_pressed() -> void:
 	var tween = create_tween()
+	click.play()
 	tween.tween_property(tutorial_screen, \"position\", Vector2(1300, tutorial_screen.position.y), 0.5)
+
+
+func _on_button_mouse_entered() -> void:
+	tick.play()
+
+
+func _on_button_2_mouse_entered() -> void:
+	tick.play()
+
+
+func _on_tut_close_button_mouse_entered() -> void:
+	tick.play()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r53ko"]
@@ -129,27 +147,33 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_oa5ni"]
 length = 0.001
-tracks/0/type = "bezier"
+
+[sub_resource type="Animation" id="Animation_mlgvx"]
+resource_name = "fly_by"
+length = 6.0
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(631, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-131, 95), Vector2(1398, 117)]
 }
-tracks/1/type = "bezier"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
+tracks/1/path = NodePath("AudioStreamPlayer2D:volume_db")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(445, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(5.02, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-9.0, -41.459]
 }
 
 [sub_resource type="Animation" id="Animation_sqi1f"]
@@ -182,7 +206,44 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rhaya"]
 _data = {
 &"RESET": SubResource("Animation_oa5ni"),
+&"fly_by": SubResource("Animation_mlgvx"),
 &"hover": SubResource("Animation_sqi1f")
+}
+
+[sub_resource type="Animation" id="Animation_rhaya"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.141176, 0.141176, 0.141176, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y4o7c"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.141176, 0.141176, 0.141176, 1), Color(0.141176, 0.141176, 0.141176, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1xfg"]
+_data = {
+&"RESET": SubResource("Animation_rhaya"),
+&"fade_in": SubResource("Animation_y4o7c")
 }
 
 [node name="StartMenu" type="CanvasLayer"]
@@ -325,6 +386,39 @@ offset_right = 656.0
 offset_bottom = 617.0
 text = "Close"
 
+[node name="LogoLargeColorLight" type="Sprite2D" parent="."]
+position = Vector2(1187, 666)
+scale = Vector2(0.273333, 0.288066)
+texture = ExtResource("12_y4o7c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_l1xfg")
+}
+autoplay = "fade_in"
+
+[node name="Tick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_sqi1f")
+volume_db = -5.0
+pitch_scale = 0.8
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_oa5ni")
+volume_db = -5.0
+
+[connection signal="mouse_entered" from="PanelContainer2/MarginContainer/VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="PanelContainer2/MarginContainer/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="PanelContainer2/MarginContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_entered"]
 [connection signal="pressed" from="PanelContainer2/MarginContainer/VBoxContainer/Button2" to="." method="_on_tutorial_button_pressed"]
+[connection signal="mouse_entered" from="TutorialScreen/TextureRect/TutCloseButton" to="." method="_on_tut_close_button_mouse_entered"]
 [connection signal="pressed" from="TutorialScreen/TextureRect/TutCloseButton" to="." method="_on_tut_close_button_pressed"]

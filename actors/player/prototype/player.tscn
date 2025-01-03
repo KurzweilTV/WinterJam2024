@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://chxud6mic8u42"]
+[gd_scene load_steps=24 format=3 uid="uid://chxud6mic8u42"]
 
 [ext_resource type="Script" uid="uid://c2kfpoya8wn6u" path="res://actors/player/prototype/player.gd" id="1_bsrf5"]
 [ext_resource type="Texture2D" uid="uid://cmyi3agbrkcsi" path="res://actors/player/Drone.png" id="2_jtfgw"]
@@ -6,12 +6,14 @@
 [ext_resource type="Script" uid="uid://bydyor5jmsok" path="res://actors/player/prototype/camera_2d.gd" id="4_t26e8"]
 [ext_resource type="FontFile" uid="uid://bakc864gqvrlp" path="res://assets/fonts/Kenney Future Narrow.ttf" id="5_tvecv"]
 [ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="6_jtfgw"]
+[ext_resource type="Material" uid="uid://byksihii3t4fo" path="res://actors/player/prototype/damage_effects.tres" id="7_buwib"]
 [ext_resource type="Texture2D" uid="uid://dnwm5l080ccbh" path="res://scenes/decorations/light_gradient.tres" id="7_ydjel"]
 [ext_resource type="Texture2D" uid="uid://cb1k4gjnyh16g" path="res://actors/target/spotlight.png" id="8_t7kf4"]
 [ext_resource type="AudioStream" uid="uid://ekw7khlsn4jm" path="res://sounds/DroneStart.mp3" id="9_yrblx"]
 [ext_resource type="AudioStream" uid="uid://2yp3ijok2fbd" path="res://sounds/DroneIdle.mp3" id="10_p3pf6"]
 [ext_resource type="AudioStream" uid="uid://bwoythphaxrfu" path="res://sounds/DroneRunning.mp3" id="11_m13tc"]
 [ext_resource type="AudioStream" uid="uid://dfwdlflb4e0q8" path="res://sounds/Damage.mp3" id="12_auc78"]
+[ext_resource type="AudioStream" uid="uid://0t2torox18tj" path="res://sounds/switch_004.ogg" id="14_bvy1c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydjel"]
 atlas = ExtResource("2_jtfgw")
@@ -155,31 +157,6 @@ outline_color = Color(0, 0.376987, 0.400208, 1)
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.294118)
 
-[sub_resource type="Gradient" id="Gradient_ydjel"]
-offsets = PackedFloat32Array(0, 0.112403, 0.341085, 1)
-colors = PackedColorArray(0.772549, 0.215686, 0.0313726, 0, 0.0577778, 0.00409658, 0.000240931, 1, 0.964742, 0.964742, 0.964742, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_t7kf4"]
-gradient = SubResource("Gradient_ydjel")
-
-[sub_resource type="Curve" id="Curve_yrblx"]
-_data = [Vector2(0.0143885, 0.431749), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_p3pf6"]
-curve = SubResource("Curve_yrblx")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m13tc"]
-particle_flag_disable_z = true
-angle_min = -268.3
-angle_max = 635.0
-gravity = Vector3(0, -50, 0)
-scale_min = 0.1
-scale_max = 0.3
-scale_curve = SubResource("CurveTexture_p3pf6")
-color_ramp = SubResource("GradientTexture1D_t7kf4")
-turbulence_noise_strength = 0.1
-
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 motion_mode = 1
@@ -305,7 +282,7 @@ amount = 30
 lifetime = 3.0
 randomness = 0.5
 texture = ExtResource("6_jtfgw")
-process_material = SubResource("ParticleProcessMaterial_m13tc")
+process_material = ExtResource("7_buwib")
 
 [node name="RedGlow" type="PointLight2D" parent="."]
 position = Vector2(0, 26)
@@ -336,6 +313,11 @@ pitch_scale = 0.9
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_auc78")
 pitch_scale = 0.5
+
+[node name="RopeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_bvy1c")
+volume_db = -5.0
+pitch_scale = 0.8
 
 [connection signal="body_entered" from="PickupRange" to="." method="_on_pickup_range_body_entered"]
 [connection signal="body_exited" from="PickupRange" to="." method="_on_pickup_range_body_exited"]

@@ -1,0 +1,297 @@
+[gd_scene load_steps=22 format=3 uid="uid://c0uelyfxv7t06"]
+
+[ext_resource type="Script" uid="uid://d2hjt72o7qgaw" path="res://scenes/game/splashscreen.gd" id="1_2honx"]
+[ext_resource type="Texture2D" uid="uid://buxup35xj73y3" path="res://assets/art/traditional-dark.png" id="1_bxsat"]
+[ext_resource type="Texture2D" uid="uid://blktr5owvj6b" path="res://assets/art/splash2.png" id="2_ej14f"]
+[ext_resource type="Texture2D" uid="uid://cmyi3agbrkcsi" path="res://actors/player/Drone.png" id="3_h78vi"]
+[ext_resource type="Texture2D" uid="uid://cdl28np0ohmt7" path="res://actors/player/explosion/smoke_01.png" id="4_845u7"]
+[ext_resource type="AudioStream" uid="uid://bwoythphaxrfu" path="res://sounds/DroneRunning.mp3" id="5_mlgvx"]
+
+[sub_resource type="Animation" id="Animation_h78vi"]
+resource_name = "ken_burns"
+length = 6.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.141176, 0.141176, 0.141176, 1), Color(0.141176, 0.141176, 0.141176, 0), Color(0.141176, 0.141176, 0.141176, 0), Color(0.141176, 0.141176, 0.141176, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Splash2:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3, 3.3, 5.43333, 5.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GodotLogo:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.33287, 0.33287), Vector2(0.4, 0.4)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_load_game"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Splash2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3.01, 6.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.769896, 0.769896), Vector2(0.9, 0.9)]
+}
+
+[sub_resource type="Animation" id="Animation_845u7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.141176, 0.141176, 0.141176, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Splash2:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GodotLogo:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.33287, 0.33287)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Splash2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.9, 0.9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mlgvx"]
+_data = {
+&"RESET": SubResource("Animation_845u7"),
+&"ken_burns": SubResource("Animation_h78vi")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4y4g"]
+atlas = ExtResource("3_h78vi")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx8md"]
+atlas = ExtResource("3_h78vi")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_845u7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4y4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx8md")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="Animation" id="Animation_oa5ni"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_sqi1f"]
+resource_name = "hover"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(631, -0.25, 0, 0.25, 0, 631, -0.25, 0, 0.25, 0, 631, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2, 4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(445, -0.25, 0, 0.25, 0, 435, -0.25, 0, 0.25, 0, 445, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2, 4)
+}
+
+[sub_resource type="Animation" id="Animation_mlgvx"]
+resource_name = "fly_by"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-131, 95), Vector2(1398, 117)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5.02, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-9.0, -41.459]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhaya"]
+_data = {
+&"RESET": SubResource("Animation_oa5ni"),
+&"fly_by": SubResource("Animation_mlgvx"),
+&"hover": SubResource("Animation_sqi1f")
+}
+
+[sub_resource type="Gradient" id="Gradient_ydjel"]
+offsets = PackedFloat32Array(0, 0.112403, 0.341085, 1)
+colors = PackedColorArray(0.772549, 0.215686, 0.0313726, 0, 0.0577778, 0.00409658, 0.000240931, 1, 0.964742, 0.964742, 0.964742, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t7kf4"]
+gradient = SubResource("Gradient_ydjel")
+
+[sub_resource type="Curve" id="Curve_yrblx"]
+_data = [Vector2(0.0143885, 0.431749), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p3pf6"]
+curve = SubResource("Curve_yrblx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mlgvx"]
+particle_flag_disable_z = true
+angle_min = -268.3
+angle_max = 635.0
+gravity = Vector3(-100, -150, 0)
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_p3pf6")
+color_ramp = SubResource("GradientTexture1D_t7kf4")
+turbulence_noise_strength = 0.1
+
+[node name="Splashscreen" type="Node2D"]
+script = ExtResource("1_2honx")
+
+[node name="GodotLogo" type="Sprite2D" parent="."]
+position = Vector2(639, 359.5)
+scale = Vector2(0.33287, 0.33287)
+texture = ExtResource("1_bxsat")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 216.0
+offset_top = 66.0
+offset_right = 1112.0
+offset_bottom = 661.0
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mlgvx")
+}
+autoplay = "ken_burns"
+speed_scale = 0.6
+
+[node name="Splash2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(640, 360)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_ej14f")
+
+[node name="FakePlayer" type="AnimatedSprite2D" parent="."]
+z_index = 5
+position = Vector2(-131, 95)
+rotation = 0.303413
+sprite_frames = SubResource("SpriteFrames_845u7")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FakePlayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_rhaya")
+}
+autoplay = "fly_by"
+speed_scale = 0.6
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="FakePlayer"]
+position = Vector2(-44.6301, -15.3674)
+amount = 30
+texture = ExtResource("4_845u7")
+process_material = SubResource("ParticleProcessMaterial_mlgvx")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="FakePlayer"]
+stream = ExtResource("5_mlgvx")
+volume_db = -9.0
+autoplay = true
+panning_strength = 3.0
